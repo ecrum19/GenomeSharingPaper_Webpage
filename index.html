@@ -8,7 +8,7 @@
         'packages':['geochart'],
       });
       google.charts.setOnLoadCallback(loadCSVData);
-
+// TODO: add markers for cities -- https://developers.google.com/chart/interactive/docs/gallery/geochart
       function loadCSVData() {
         fetch('/National_Initiatives_Figure_Data.csv')
           .then(response => response.text())
@@ -82,7 +82,7 @@
         
 
         var options = {
-          colorAxis: {colors: ['#000000', '#69172F', '#882C4A', '#FFEABA', '#E6C8A1', '#E4A94F']}, // order: [no, limited scope, H3 Africa, finished, planned, active]
+          colorAxis: {colors: ['#4f5050', '#69172F', '#882C4A', '#FFEABA', '#E6C8A1', '#E4A94F']}, // order: [no, limited scope, H3 Africa, finished, planned, active]
           legend: 'none'
         };
 
@@ -126,7 +126,7 @@
     </div>
     
     <div class="legend">
-      <h3>Legend:</h3>
+      <h3>National Initiative Status:</h3>
       <ul>
         <li>
           <span class="legend-colorBox" style="background-color: #E4A94F;"></span>
@@ -149,11 +149,90 @@
           <span class="legend-text">Limited Scope</span>
         </li>
         <li>
-          <span class="legend-colorBox" style="background-color: #000000;"></span>
+          <span class="legend-colorBox" style="background-color: #4f5050;"></span>
           <span class="legend-text">None</span>
         </li>
       </ul>
-      
+    </div>
+
+    <div class="notable-initiatives">
+      <h3>Notable Initiatives:</h3>
+      <div class="columns">
+        <div class="column">
+          <h4>North America</h4>
+          <ul>
+            <li>
+              <span class="legend-colorBox" style="background-color: #E4A94F;"></span>
+              <span class="legend-text">USA</span>
+            </li>
+            <li>
+              <span class="legend-colorBox" style="background-color: #E4A94F;"></span>
+              <span class="legend-text">Canada</span>
+            </li>
+          </ul>
+          <h4>South America</h4>
+          <ul>
+            <li>
+              <span class="legend-colorBox" style="background-color: #b08175;"></span>
+              <span class="legend-text">Brazil</span>
+            </li>
+            <li>
+              <span class="legend-colorBox" style="background-color: #b08175;"></span>
+              <span class="legend-text">Argentina</span>
+            </li>
+          </ul>
+        </div>
+        <div class="column">
+          <h4>Europe</h4>
+          <ul>
+            <li>
+              <span class="legend-colorBox" style="background-color: #C33152;"></span>
+              <span class="legend-text">Germany</span>
+            </li>
+            <li>
+              <span class="legend-colorBox" style="background-color: #C33152;"></span>
+              <span class="legend-text">France</span>
+            </li>
+          </ul>
+          <h4>Africa</h4>
+          <ul>
+            <li>
+              <span class="legend-colorBox" style="background-color: #C33152;"></span>
+              <span class="legend-text">Kenya</span>
+            </li>
+            <li>
+              <span class="legend-colorBox" style="background-color: #C33152;"></span>
+              <span class="legend-text">Ghana</span>
+            </li>
+          </ul>
+        </div>
+        <div class="column">
+          <h4>Asia</h4>
+          <ul>
+            <li>
+              <span class="legend-colorBox" style="background-color: #E6C8A1;"></span>
+              <span class="legend-text">China</span>
+            </li>
+            <li>
+              <span class="legend-colorBox" style="background-color: #E6C8A1;"></span>
+              <span class="legend-text">Japan</span>
+            </li>
+            
+          </ul>
+          
+          <h4>Oceania</h4>
+          <ul>
+            <li>
+              <span class="legend-colorBox" style="background-color: #4f5050;"></span>
+              <span class="legend-text">Fiji</span>
+            </li>
+            <li>
+              <span class="legend-colorBox" style="background-color: #4f5050;"></span>
+              <span class="legend-text">Samoa</span>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </body>
   <style>
@@ -166,12 +245,15 @@
       border: 1px solid black;
       padding: 10px;
     }
-    .legend ul {
+    h3 {
+      margin-top: 0px;
+    }
+    ul {
       list-style-type: none;
       padding: 0;
       margin: 0;
     }
-    .legend li {
+    li {
       display: flex;
       align-items: center;
       margin-bottom: 5px;
@@ -193,5 +275,38 @@
       border: 1px solid black;
       padding: 10px;
     }
+
+
+    .notable-initiatives{
+      display: flex;
+      flex-wrap: wrap;
+      
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      max-width: fit-content;
+      border: 1px solid black;
+      padding: 10px;
+    }
+    .notable-initiatives .legend-colorBox{
+      width: 1rem;
+      height: 1rem;
+      display: inline-block;
+      border-radius: 50%;
+    }
+    .columns {
+      display: flex;
+      width: 100%;
+    }
+    .column {
+      flex: 1;
+      padding: 5px;
+    }
+    .column h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 5px 0;
+  }
+  
   </style>
 </html>

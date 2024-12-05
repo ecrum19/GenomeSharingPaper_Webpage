@@ -1,0 +1,24 @@
+Company [source],Clinical?,Main Market,Seq. Gen.,Seq. Analysis,Seq. Storage,Results,Seq. Sharing
+"Illumina, Inc. [A,B,C]",Y (sw + eq),Equipment + software,1,1,1,Sequence - Download,0
+"Natera, Inc. [A,B]",Y (service),Genetic Testing,1,1,1,Results - Active Sharing*,0
+"Blueprint Medicines [A,B]",Y (service),BioPharma,0,1,0,,0
+"Ionis Pharmaceuticals, Inc. [A,B]",Y (service),RNA Therapy,1,1,0,,0
+"Krystal Biotech [A,B]",Y (service),Gene Therapy,1,1,0,,0
+"CRISPR Theraputics [A,B]",Y (service),Gene Editing,1,1,0,,0
+"Genscript Biotech Corporation [A,B]",N,DNA Synthesis,1,1,0,,0
+"10x Genomics, Inc. [A,B]",Y (sw + eq),Equipment + software,1,1,0,,0
+"Myriad Genetics [A,B]",Y (service),Genetic Testing,1,1,1,Results - Download,0
+"Intellia Therapeutics [A,B]",Y (service),Gene Editing,1,1,0,,0
+"Beam Therapeutics [A,B]",Y (service),Gene Editing,1,1,0,,0
+"NeoGenomics [A,B]",Y (service),Precision Oncology,1,1,1,Results - Download,0
+"Genus [A,B]",N,Animal Genetics,0,1,0,,0
+"Ginko Bioworks [A,B]",Y (service),Gene Therapy,0,1,0,,0
+GeneDx Holdings [A],Y (service),Genetic Testing,1,1,1,Sequence - Download,0
+"Thermo Fisher Scientific, Inc. [C]",Y (sw + eq),Equipment + software,1,1,0,,0
+QIAGEN [C],Y (sw + eq),Equipment + software,1,1,0,,0
+"Pacific Biosciences of California [B,C]",Y (sw + eq),Equipment + software,1,1,0,,0
+Agilent Technologies [C],Y (sw + eq),Equipment + software,1,1,0,,0
+BGI Genomics [C],Y (sw + eq),Equipment + software,1,1,0,,0
+,,,,,,,
+Date websites were accessed: 2024-09-12,,,,,,,
+* website states that results can be delivered / integrated into EHR (via EPIC Aura),,,,,,,
