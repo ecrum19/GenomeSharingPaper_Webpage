@@ -7,19 +7,18 @@
     <script type="text/javascript">
       google.charts.load('current', {
         'packages':['geochart'],
+        'mapsApiKey': 'AIzaSyBArc0dMHQw1ZwpQwMso8IPaT3N6LJVkI4'
       });
       google.charts.setOnLoadCallback(loadCSVData);
-// TODO: add markers for cities -- https://developers.google.com/chart/interactive/docs/gallery/geochart
       function loadCSVData() {
-        fetch('/National_Initiatives_Figure_Data.csv')
+        fetch('/GenomeInitiativeCountries.csv')
           .then(response => response.text())
           .then(csvText => {
             Papa.parse(csvText, {
               header: true,
               complete: function(results) {
-                console.log(results.meta.fields)
                 const extraData = additionaDataDisplay(results.data, results.meta.fields);
-                drawRegionsMap(results.data, [results.meta.fields[1],results.meta.fields[8]], extraData);
+                drawRegionsMap(results.data, [results.meta.fields[1],results.meta.fields[3]], extraData);
               }
             });
           });
@@ -43,13 +42,7 @@
             row[fields[0]], 
             row[fields[1]], 
             row[fields[2]], 
-            row[fields[3]], 
-            row[fields[4]], 
-            row[fields[5]], 
-            row[fields[6]], 
-            row[fields[7]],
-            parseFloat(row[fields[8]]),
-            row[fields[9]]
+            parseFloat(row[fields[3]]),
           ])
         });
 
@@ -68,6 +61,7 @@
           mapDataTable.addRow([row[fields[0]], parseFloat(row[fields[1]])]);
         });
 
+
         /**
          * @param selectedItem ...
          * 
@@ -75,7 +69,7 @@
          */
         function getCountryInfo(selectedItem) {
           var country_info = [];
-          for (var i=0; i<10; i++) {
+          for (var i=0; i<4; i++) {
             country_info.push(extra.getValue(selectedItem, i));
           }
           return country_info;
@@ -83,8 +77,8 @@
         
 
         var options = {
-          colorAxis: {colors: ['#4f5050', '#69172F', '#882C4A', '#FFEABA', '#E6C8A1', '#E4A94F']}, // order: [no, limited scope, H3 Africa, finished, planned, active]
-          legend: 'none'
+          colorAxis: {colors: ['#afafaf', '#cc85ad', '#f5b8a3', '#c2ebff', '#d6e085']}, // order: [no, limited scope, H3 Africa, finished, active]
+          legend: 'none',
         };
 
         var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
@@ -130,31 +124,41 @@
       <h3>National Initiative Status:</h3>
       <ul>
         <li>
-          <span class="legend-colorBox" style="background-color: #E4A94F;"></span>
+          <span class="legend-colorBox" style="background-color: #d6e085;"></span>
           <span class="legend-text">Active</span>
         </li>
         <li>
-          <span class="legend-colorBox" style="background-color: #E6C8A1;"></span>
-          <span class="legend-text">Planned</span>
-        </li>
-        <li>
-          <span class="legend-colorBox" style="background-color: #b08175;"></span>
+          <span class="legend-colorBox" style="background-color: #c2ebff;"></span>
           <span class="legend-text">Finished</span>
         </li>
         <li>
-          <span class="legend-colorBox" style="background-color: #C33152;"></span>
+          <span class="legend-colorBox" style="background-color: #f5b8a3;"></span>
           <span class="legend-text">H3 Africa</span>
         </li>
         <li>
-          <span class="legend-colorBox" style="background-color: #882C4A;"></span>
+          <span class="legend-colorBox" style="background-color: #cc85ad;"></span>
           <span class="legend-text">Limited Scope</span>
         </li>
         <li>
-          <span class="legend-colorBox" style="background-color: #4f5050;"></span>
+          <span class="legend-colorBox" style="background-color: #afafaf;"></span>
           <span class="legend-text">None</span>
         </li>
       </ul>
     </div>
+
+    <div class="dot" id="usa-dot" style="top: 500px; left: 350px;"></div>
+    <div class="dot" id="canada-dot" style="top: 390px; left: 320px;"></div>
+    <div class="dot" id="brazil-dot" style="top: 720px; left: 560px;"></div>
+    <div class="dot" id="uruguay-dot" style="top: 818px; left: 534px;"></div>
+    <div class="dot" id="finland-dot" style="top: 340px; left: 870px;"></div>
+    <div class="dot" id="ireland-dot" style="top: 414px; left: 732px;"></div>
+    <div class="dot" id="egypt-dot" style="top: 558px; left: 886px;"></div>
+    <div class="dot" id="saudi-dot" style="top: 568px; left: 946px;"></div>
+    <div class="dot" id="china-dot" style="top: 525px; left: 1186px;"></div>
+    <div class="dot" id="skorea-dot" style="top: 516px; left: 1294px;"></div>
+    <div class="dot" id="australia-dot" style="top: 780px; left: 1320px;"></div>
+    <div class="dot" id="nz-dot" style="top: 870px; left: 1472px;"></div>
+
 
     <div class="notable-initiatives">
       <h3>Notable Initiatives:</h3>
@@ -163,7 +167,7 @@
           <h4>North America</h4>
           <ul>
             <li>
-              <span class="legend-colorBox" style="background-color: #3C3B6E;"></span>
+              <span class="legend-colorBox" id="usa"></span>
               <span class="country-info">
                 <span class="legend-text">USA</span>
                 <span class="info-right">
@@ -173,7 +177,7 @@
               </span>
             </li>
             <li>
-              <span class="legend-colorBox" style="background-color: #8B0000;"></span>
+              <span class="legend-colorBox" id="canada"></span>
               <span class="country-info">
                 <span class="legend-text">Canada</span>
                 <span class="info-right">
@@ -186,7 +190,7 @@
           <h4>South America</h4>
           <ul>
             <li>
-              <span class="legend-colorBox" style="background-color: #009C3B;"></span>
+              <span class="legend-colorBox" id="brazil"></span>
               <span class="country-info">
                 <span class="legend-text">Brazil</span>
                 <span class="info-right">
@@ -196,12 +200,12 @@
               </span>
             </li>
             <li>
-              <span class="legend-colorBox" style="background-color: #D52B1E;"></span>
+              <span class="legend-colorBox" id="uruguay"></span>
               <span class="country-info">
-                <span class="legend-text">Chile</span>
+                <span class="legend-text">Uruguay</span>
                 <span class="info-right">
                   <i class="fas fa-dna"></i>
-                  <span>1.1 K</span>
+                  <span>0.85 K</span>
                 </span>
               </span>
             </li>
@@ -211,17 +215,17 @@
           <h4>Europe</h4>
           <ul>
             <li>
-              <span class="legend-colorBox" style="background-color: #00247D;"></span>
+              <span class="legend-colorBox" id="finland"></span>
               <span class="country-info">
-                <span class="legend-text">United Kingdom</span>
+                <span class="legend-text">Finland</span>
                 <span class="info-right">
                   <i class="fas fa-dna"></i>
-                  <span>100 K</span>
+                  <span>500 K</span>
                 </span>
               </span>
             </li>
             <li>
-              <span class="legend-colorBox" style="background-color: #169B62;"></span>
+              <span class="legend-colorBox" id="ireland"></span>
               <span class="country-info">
                 <span class="legend-text">Ireland</span>
                 <span class="info-right">
@@ -231,10 +235,10 @@
               </span>
             </li>
           </ul>
-          <h4>Africa</h4>
+          <h4>Africa / Middle East</h4>
           <ul>
             <li>
-              <span class="legend-colorBox" style="background-color: #000000;"></span>
+              <span class="legend-colorBox" id="egypt"></span>
               <span class="country-info">
                 <span class="legend-text">Egypt</span>
                 <span class="info-right">
@@ -244,12 +248,12 @@
               </span>
             </li>
             <li>
-              <span class="legend-colorBox" style="background-color: #008753;"></span>
+              <span class="legend-colorBox" id="saudi"></span>
               <span class="country-info">
-                <span class="legend-text">Nigeria</span>
+                <span class="legend-text">Saudi Arabia</span>
                 <span class="info-right">
                   <i class="fas fa-dna"></i>
-                  <span>???</span>
+                  <span>100 K</span>
                 </span>
               </span>
             </li>
@@ -259,7 +263,7 @@
           <h4>Asia</h4>
           <ul>
             <li>
-              <span class="legend-colorBox" style="background-color: #DE2910;"></span>
+              <span class="legend-colorBox" id="china"></span>
               <span class="country-info">
                 <span class="legend-text">China</span>
                 <span class="info-right">
@@ -269,12 +273,12 @@
               </span>
             </li>
             <li>
-              <span class="legend-colorBox" style="background-color: #FFFFFF;"></span>
+              <span class="legend-colorBox" id="skorea"></span>
               <span class="country-info">
-                <span class="legend-text">Japan</span>
+                <span class="legend-text">South Korea</span>
                 <span class="info-right">
                   <i class="fas fa-dna"></i>
-                  <span>250 K</span>
+                  <span>50 M</span>
                 </span>
               </span>
             </li>
@@ -284,7 +288,7 @@
           <h4>Oceania</h4>
           <ul>
             <li>
-              <span class="legend-colorBox" style="background-color: #FF0000;"></span>
+              <span class="legend-colorBox" id="australia"></span>
               <span class="country-info">
                 <span class="legend-text">Australia</span>
                 <span class="info-right">
@@ -294,7 +298,7 @@
               </span>
             </li>
             <li>
-              <span class="legend-colorBox" style="background-color: #00247D;"></span>
+              <span class="legend-colorBox" id="nz"></span>
               <span class="country-info">
                 <span class="legend-text">New Zealand</span>
                 <span class="info-right">
@@ -314,7 +318,6 @@
       bottom: 10px;
       left: 10px;
       max-width: fit-content;
-      
       border: 1px solid black;
       padding: 10px;
     }
@@ -335,8 +338,9 @@
       margin-left: 10px;
     }
     .legend-colorBox {
-      width: 1.5rem;
-      height: 1.5rem;
+      height: 2rem;
+      width: 2rem;
+      border: 1pt solid black;
       display: inline-block;
     }
     .info-menu {
@@ -353,10 +357,9 @@
     .notable-initiatives{
       display: flex;
       flex-wrap: wrap;
-      
-      position: fixed;
+      position: sticky;
       bottom: 10px;
-      right: 10px;
+      left: 630px;
       max-width: fit-content;
       border: 1px solid black;
       padding: 10px;
@@ -393,6 +396,157 @@
     }
     .country-info .info-right .fa-dna {
       margin-right: 5px;
+    }
+
+    
+    #usa {
+      width: 20px;
+      height: 20px;
+      background-color: #3C3B6E;
+      border: 3px solid #B22234;
+    }
+    #canada {
+      width: 20px;
+      height: 20px;
+      background-color: #FF0000;
+      border: 3px solid black;
+    }
+    #finland {
+      width: 20px;
+      height: 20px;
+      background-color: #FFFFFF;
+      border: 3px solid #003580;
+    }
+    #ireland {
+      width: 20px;
+      height: 20px;
+      background-color: #169B62;
+      border: 2px solid #FF883E;
+    }
+    #egypt {
+      width: 20px;
+      height: 20px;
+      background-color: #000000;
+      border: 3px solid #CE1126;
+    }
+    #saudi {
+      width: 20px;
+      height: 20px;
+      background-color: #FFFFFF;
+      border: 3px solid #008753;
+    }
+    #china {
+      width: 20px;
+      height: 20px;
+      background-color: #FFDE00;
+      border: 3px solid #FF0000;
+    }
+    #skorea {
+      width: 20px;
+      height: 20px;
+      background-color: #FFFFFF;
+      border: 3px solid #BC002D;
+    }
+    #brazil {
+      width: 20px;
+      height: 20px;
+      background-color: #FFDF00;
+      border: 3px solid #009C3B;
+    }
+    #uruguay {
+      width: 20px;
+      height: 20px;
+      background-color: #3E6BB7;
+      border: 3px solid #FCD116;
+    }
+    #australia {
+      width: 20px;
+      height: 20px;
+      background-color: #FF0000 ;
+      border: 3px solid #00247D;
+    }
+    #nz {
+      width: 20px;
+      height: 20px;
+      background-color: #00247D;
+      border: 3px solid #CC142B;
+    }
+
+    .dot {
+      border-radius: 50%;
+      position: absolute;
+    }
+    #usa-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #3C3B6E;
+      border: 2px solid #B22234;
+    }
+    #canada-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #FF0000;
+      border: 2px solid black;
+    }
+    #finland-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #FFFFFF;
+      border: 3px solid #003580;
+    }
+    #ireland-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #169B62;
+      border: 2px solid #FF883E;
+    }
+    #egypt-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #000000;
+      border: 2px solid #CE1126;
+    }
+    #saudi-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #FFFFFF;
+      border: 3px solid #006C35;
+    }
+    #china-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #FFDE00;
+      border: 3px solid #FF0000;
+    }
+    #skorea-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #FFFFFF;
+      border: 3px solid #C60C30;
+    }
+    #brazil-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #FFDF00;
+      border: 3px solid #009C3B;
+    }
+    #uruguay-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #3E6BB7;
+      border: 3px solid #FCD116;
+    }
+    #australia-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #FF0000;
+      border: 3px solid #00247D;
+    }
+    #nz-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #00247D;
+      border: 3px solid #CC142B;
     }
 
   

@@ -1,237 +1,234 @@
-ISO 3166-1 alpha-2 Code,Project (num),Country,Project Status
-AM,1,Armenia,Active
-AU,1,Australia,Active
-BH,1,Bahrain,Active
-BD,1,Bangladesh,Active
-BR,1,Brazil,Active
-CA,1,Canada,Active
-CL,1,Chile,Active
-CN,1,China,Active
-CY,1,Cyprus,Active
-CZ,1,Czech Republic,Active
-DK,1,Denmark,Active
-EG,1,Egypt,Active
-EE,1,Estonia,Active
-FI,1,Finland,Active
-FR,1,France,Active
-HK,1,Hong Kong (China),Active
-IR,1,Iran,Active
-IE,1,Ireland,Active
-JP,1,Japan,Active
-LV,1,Latvia,Active
-MT,1,Malta,Active
-MX,1,Mexico,Active
-NL,1,Netherlands,Active
-NZ,1,New Zealand,Active
-PL,1,Poland,Active
-PT,1,Portugal,Active
-QA,1,Qatar,Active
-RU,1,Russia,Active
-SA,1,Saudi Arabia,Active
-SG,1,Singapore,Active
-SI,1,Slovenia,Active
-KR,1,South Korea,Active
-CH,1,Switzerland,Active
-TW,1,Taiwan,Active
-TH,1,Thailand,Active
-TR,1,Turkey,Active
-AE,1,United Arab Emirates,Active
-GB,1,United Kingdom,Active
-US,1,United States,Active
-UY,1,Uruguay,Active
-VN,1,Vietnam,Active
-BE,0.5,Belgium,Finished
-GL,0.5,Greenland (Denmark),Finished
-IS,0.5,Iceland,Finished
-IN,0.5,India,Finished
-LT,0.5,Lithuania,Finished
-PE,0.5,Peru,Finished
-SE,0.5,Sweden,Finished
-IL,0.5,Israel,Finished
-AR,0.1,Argentina,Limited Scope
-HR,0.1,Croatia,Limited Scope
-CD,0.1,DR Congo,Limited Scope
-ID,0.1,Indonesia,Limited Scope
-KW,0.1,Kuwait,Limited Scope
-PK,0.1,Pakistan,Limited Scope
-PH,0.1,Philippines,Limited Scope
-TD,0.1,Chad,Limited Scope
-KM,0.1,Comoros,Limited Scope
-GR,0.1,Greece,Limited Scope
-KZ,0.1,Kazakhstan,Limited Scope
-MY,0.1,Malaysia,Limited Scope
-MA,0.1,Morocco,Limited Scope
-LK,0.1,Sri Lanka,Limited Scope
-CU,0.1,Cuba,Limited Scope
-ET,0.1,Ethiopia,Limited Scope
-CO,0.1,Colombia,Limited Scope
-DO,0.1,Dominican Republic,Limited Scope
-EC,0.1,Ecuador,Limited Scope
-SV,0.1,El Salvador,Limited Scope
-GT,0.1,Guatemala,Limited Scope
-HT,0.1,Haiti,Limited Scope
-HN,0.1,Honduras,Limited Scope
-PR,0.1,Puerto Rico (US),Limited Scope
-PG,0.1,Papua New Guinea,Limited Scope
-BW,0.1,Botswana,Limited Scope
-AT,0.25,Austria,Planned
-IT,0.25,Italy,Planned
-RS,0.25,Serbia,Planned
-UG,0.75,Uganda,H3 Africa
-GM,0.75,Gambia,H3 Africa
-GH,0.75,Ghana,H3 Africa
-KE,0.75,Kenya,H3 Africa
-NG,0.75,Nigeria,H3 Africa
-ZA,0.75,South Africa,H3 Africa
-TZ,0.75,Tanzania,H3 Africa
-CF,0.75,Central African Republic,H3 Africa
-AF,0,Afghanistan,No
-AL,0,Albania,No
-DZ,0,Algeria,No
-AS,0,American Samoa (US),No
-AD,0,Andorra,No
-AO,0,Angola,No
-AI,0,Anguilla (UK),No
-AG,0,Antigua and Barbuda,No
-AW,0,Aruba (Netherlands),No
-AZ,0,Azerbaijan,No
-BS,0,Bahamas,No
-BB,0,Barbados,No
-BY,0,Belarus,No
-BZ,0,Belize,No
-BJ,0,Benin,No
-BM,0,Bermuda (UK),No
-BT,0,Bhutan,No
-BO,0,Bolivia,No
-BA,0,Bosnia and Herzegovina,No
-VG,0,British Virgin Islands (UK),No
-BN,0,Brunei,No
-BG,0,Bulgaria,No
-BF,0,Burkina Faso,No
-BI,0,Burundi,No
-KH,0,Cambodia,No
-CM,0,Cameroon,No
-CV,0,Cape Verde,No
-KY,0,Cayman Islands (UK),No
-CX,0,Christmas Island (Australia),No
-CC,0,Cocos (Keeling) Islands (Australia),No
-CG,0,Congo,No
-CK,0,Cook Islands (NZ),No
-CR,0,Costa Rica,No
-CW,0,Curacao (Netherlands),No
-DJ,0,Djibouti,No
-DM,0,Dominica,No
-,0,East Timor,No
-GQ,0,Equatorial Guinea,No
-ER,0,Eritrea,No
-SZ,0,Eswatini,No
-FM,0,F.S.Micronesia,No
-FK,0,Falkland Islands (UK),No
-FO,0,Faroe Islands (Denmark),No
-FJ,0,Fiji,No
-PF,0,French Polynesia (France),No
-GA,0,Gabon,No
-GE,0,Georgia,No
-GI,0,Gibraltar (UK),No
-GD,0,Grenada,No
-GU,0,Guam (US),No
-GG,0,Guernsey (UK),No
-GN,0,Guinea,No
-GW,0,Guinea-Bissau,No
-GY,0,Guyana,No
-HU,0,Hungary,No
-IQ,0,Iraq,No
-IM,0,Isle of Man (UK),No
-CI,0,Ivory Coast,No
-JM,0,Jamaica,No
-JE,0,Jersey (UK),No
-JO,0,Jordan,No
-KI,0,Kiribati,No
-XK,0,Kosovo,No
-KG,0,Kyrgyzstan,No
-LA,0,Laos,No
-LB,0,Lebanon,No
-LS,0,Lesotho,No
-LR,0,Liberia,No
-LY,0,Libya,No
-LI,0,Liechtenstein,No
-LU,0,Luxembourg,No
-MO,0,Macau (China),No
-MG,0,Madagascar,No
-MW,0,Malawi,No
-MV,0,Maldives,No
-ML,0,Mali,No
-MH,0,Marshall Islands,No
-MR,0,Mauritania,No
-MU,0,Mauritius,No
-MD,0,Moldova,No
-MC,0,Monaco,No
-MN,0,Mongolia,No
-ME,0,Montenegro,No
-MS,0,Montserrat (UK),No
-MZ,0,Mozambique,No
-MM,0,Myanmar,No
-NA,0,Namibia,No
-NR,0,Nauru,No
-NP,0,Nepal,No
-NC,0,New Caledonia (France),No
-NI,0,Nicaragua,No
-NE,0,Niger,No
-NU,0,Niue (NZ),No
-NF,0,Norfolk Island (Australia),No
-KP,0,North Korea,No
-MK,0,North Macedonia,No
-MP,0,Northern Mariana Islands (US),No
-NO,0,Norway,No
-OM,0,Oman,No
-PW,0,Palau,No
-PS,0,Palestine,No
-PA,0,Panama,No
-PY,0,Paraguay,No
-PN,0,Pitcairn Islands (UK),No
-RO,0,Romania,No
-RW,0,Rwanda,No
-BL,0,Saint Barthelemy (France),No
-SH,0,Saint Helena; Ascension and Tristan da Cunha (UK),No
-KN,0,Saint Kitts and Nevis,No
-LC,0,Saint Lucia,No
-MF,0,Saint Martin (France),No
-PM,0,Saint Pierre and Miquelon (France),No
-VC,0,Saint Vincent and the Grenadines,No
-WS,0,Samoa,No
-SM,0,San Marino,No
-ST,0,Sao Tome and Principe,No
-SN,0,Senegal,No
-SC,0,Seychelles,No
-SL,0,Sierra Leone,No
-SX,0,Sint Maarten (Netherlands),No
-SK,0,Slovakia,No
-SB,0,Solomon Islands,No
-SO,0,Somalia,No
-,0,South Ossetia,No
-SS,0,South Sudan,No
-ES,0,Spain,No
-SD,0,Sudan,No
-SR,0,Suriname,No
-SY,0,Syria,No
-TJ,0,Tajikistan,No
-TG,0,Togo,No
-TK,0,Tokelau (NZ),No
-TO,0,Tonga,No
-TT,0,Trinidad and Tobago,No
-TN,0,Tunisia,No
-TM,0,Turkmenistan,No
-TC,0,Turks and Caicos Islands (UK),No
-TV,0,Tuvalu,No
-VI,0,U.S.Virgin Islands (US),No
-UA,0,Ukraine,No
-UZ,0,Uzbekistan,No
-VU,0,Vanuatu,No
-VA,0,Vatican City,No
-VE,0,Venezuela,No
-WF,0,Wallis and Futuna (France),No
-EH,0,Western Sahara,No
-YE,0,Yemen,No
-ZM,0,Zambia,No
-ZW,0,Zimbabwe,No
-DE,0,Germany,No
+Country,ISO 3166-1 alpha-2 Code,national genomic project status,project status (number)
+Armenia,AM,active,1,
+Australia,AU,active,1,
+Bahrain,BH,active,1,
+Bangladesh,BD,active,1,
+Brazil,BR,active,1,
+Canada,CA,active,1,
+China,CN,active,1,
+Cyprus,CY,active,1,
+Czech Republic,CZ,active,1,
+Denmark,DK,active,1,
+Egypt,EG,active,1,
+Estonia,EE,active,1,
+Finland,FI,active,1,
+France,FR,active,1,
+Hong Kong (China),HK,active,1,
+Iran,IR,active,1,
+Ireland,IE,active,1,
+Japan,JP,active,1,
+Latvia,LV,active,1,
+Malta,MT,active,1,
+Mexico,MX,active,1,
+Netherlands,NL,active,1,
+New Zealand,NZ,active,1,
+Poland,PL,active,1,
+Portugal,PT,active,1,
+Qatar,QA,active,1,
+Saudi Arabia,SA,active,1,
+Singapore,SG,active,1,
+Slovenia,SI,active,1,
+South Korea,KR,active,1,
+Switzerland,CH,active,1,
+Taiwan,TW,active,1,
+Thailand,TH,active,1,
+Turkey,TR,active,1,
+United Kingdom,GB,active,1,
+United Arab Emirates,AE,active,1,
+Uruguay,UY,active,1,
+United States,US,active,1,
+Vietnam,VN,active,1,
+Germany,DE,active,1,
+Belgium,BE,active,1,
+India,IN,active,1,
+Austria,AT,active,1,
+Italy,IT,active,1,
+Serbia,RS,active,1,
+Bulgaria,BG,active,1,
+Croatia,HR,active,1,
+Greece,GR,active,1,
+Hungary,HU,active,1,
+Lithuania,LT,active,1,
+Luxembourg,LU,active,1,
+Norway,NO,active,1,
+Romania,RO,active,1,
+Spain,ES,active,1,
+Sweden,SE,active,1,
+Greenland (Denmark),GL,finished,0.7,
+Iceland,IS,finished,0.7,
+Peru,PE,finished,0.7,
+Chile,CL,finished,0.7,
+Russia,RU,finished,0.7,
+Argentina,AR,limited scope,0.5,
+DR Congo,CD,limited scope,0.5,
+Indonesia,ID,limited scope,0.5,
+Kuwait,KW,limited scope,0.5,
+Pakistan,PK,limited scope,0.5,
+Philippines,PH,limited scope,0.5,
+Chad,TD,limited scope,0.5,
+Comoros,KM,limited scope,0.5,
+Kazakhstan,KZ,limited scope,0.5,
+Malaysia,MY,limited scope,0.5,
+Morocco,MA,limited scope,0.5,
+Sri Lanka,LK,limited scope,0.5,
+Cuba,CU,limited scope,0.5,
+Ethiopia,ET,limited scope,0.5,
+Colombia,CO,limited scope,0.5,
+Dominican Republic,DO,limited scope,0.5,
+Ecuador,EC,limited scope,0.5,
+El Salvador,SV,limited scope,0.5,
+Guatemala,GT,limited scope,0.5,
+Haiti,HT,limited scope,0.5,
+Honduras,HN,limited scope,0.5,
+Puerto Rico (US),PR,limited scope,0.5,
+Papua New Guinea,PG,limited scope,0.5,
+Botswana,BW,limited scope,0.5,
+Uganda,UG,limited scope-H3 Africa,0.3,
+Gambia,GM,limited scope-H3 Africa,0.3,
+Ghana,GH,limited scope-H3 Africa,0.3,
+Kenya,KE,limited scope-H3 Africa,0.3,
+Nigeria,NG,limited scope-H3 Africa,0.3,
+South Africa,ZA,limited scope-H3 Africa,0.3,
+Tanzania,TZ,limited scope-H3 Africa,0.3,
+Central African Republic,CF,limited scope-H3Africa,0.3,
+Afghanistan,AF,no,0,
+Albania,AL,no,0,
+Algeria,DZ,no,0,
+American Samoa (US),AS,no,0,
+Andorra,AD,no,0,
+Angola,AO,no,0,
+Anguilla (UK),AI,no,0,
+Antigua and Barbuda,AG,no,0,
+Aruba (Netherlands),AW,no,0,
+Azerbaijan,AZ,no,0,
+Bahamas,BS,no,0,
+Barbados,BB,no,0,
+Belarus,BY,no,0,
+Belize,BZ,no,0,
+Benin,BJ,no,0,
+Bermuda (UK),BM,no,0,
+Bhutan,BT,no,0,
+Bolivia,BO,no,0,
+Bosnia and Herzegovina,BA,no,0,
+British Virgin Islands (UK),VG,no,0,
+Brunei,BN,no,0,
+Burkina Faso,BF,no,0,
+Burundi,BI,no,0,
+Cambodia,KH,no,0,
+Cameroon,CM,no,0,
+Cape Verde,CV,no,0,
+Cayman Islands (UK),KY,no,0,
+Christmas Island (Australia),CX,no,0,
+Cocos (Keeling) Islands (Australia),CC,no,0,
+Congo,CG,no,0,
+Cook Islands (NZ),CK,no,0,
+Costa Rica,CR,no,0,
+Cura‡ao (Netherlands),CW,no,0,
+Djibouti,DJ,no,0,
+Dominica,DM,no,0,
+Equatorial Guinea,GQ,no,0,
+Eritrea,ER,no,0,
+Eswatini,SZ,no,0,
+F.S.Micronesia,FM,no,0,
+Falkland Islands (UK),FK,no,0,
+Faroe Islands (Denmark),FO,no,0,
+Fiji,FJ,no,0,
+French Polynesia (France),PF,no,0,
+Gabon,GA,no,0,
+Georgia,GE,no,0,
+Gibraltar (UK),GI,no,0,
+Grenada,GD,no,0,
+Guam (US),GU,no,0,
+Guernsey (UK),GG,no,0,
+Guinea,GN,no,0,
+Guinea-Bissau,GW,no,0,
+Guyana,GY,no,0,
+Iraq,IQ,no,0,
+Isle of Man (UK),IM,no,0,
+Ivory Coast,CI,no,0,
+Jamaica,JM,no,0,
+Jersey (UK),JE,no,0,
+Jordan,JO,no,0,
+Kiribati,KI,no,0,
+Kosovo,XK,no,0,
+Kyrgyzstan,KG,no,0,
+Laos,LA,no,0,
+Lebanon,LB,no,0,
+Lesotho,LS,no,0,
+Liberia,LR,no,0,
+Libya,LY,no,0,
+Liechtenstein,LI,no,0,
+Macau (China),MO,no,0,
+Madagascar,MG,no,0,
+Malawi,MW,no,0,
+Maldives,MV,no,0,
+Mali,ML,no,0,
+Marshall Islands,MH,no,0,
+Mauritania,MR,no,0,
+Mauritius,MU,no,0,
+Moldova,MD,no,0,
+Monaco,MC,no,0,
+Mongolia,MN,no,0,
+Montenegro,ME,no,0,
+Montserrat (UK),MS,no,0,
+Mozambique,MZ,no,0,
+Myanmar,MM,no,0,
+Namibia,NA,no,0,
+Nauru,NR,no,0,
+Nepal,NP,no,0,
+New Caledonia (France),NC,no,0,
+Nicaragua,NI,no,0,
+Niger,NE,no,0,
+Niue (NZ),NU,no,0,
+Norfolk Island (Australia),NF,no,0,
+North Korea,KP,no,0,
+North Macedonia,MK,no,0,
+Northern Mariana Islands (US),MP,no,0,
+Oman,OM,no,0,
+Palau,PW,no,0,
+Palestine,PS,no,0,
+Panama,PA,no,0,
+Paraguay,PY,no,0,
+Pitcairn Islands (UK),PN,no,0,
+Rwanda,RW,no,0,
+Saint Barthlemy (France),BL,no,0,
+Saint Helena Ascension and Tristan da Cunha (UK),SH,no,0,
+Saint Kitts and Nevis,KN,no,0,
+Saint Lucia,LC,no,0,
+Saint Martin (France),MF,no,0,
+Saint Pierre and Miquelon (France),PM,no,0,
+Saint Vincent and the Grenadines,VC,no,0,
+Samoa,WS,no,0,
+San Marino,SM,no,0,
+Sao Tome and Principe,ST,no,0,
+Senegal,SN,no,0,
+Seychelles,SC,no,0,
+Sierra Leone,SL,no,0,
+Sint Maarten (Netherlands),SX,no,0,
+Slovakia,SK,no,0,
+Solomon Islands,SB,no,0,
+Somalia,SO,no,0,
+South Sudan,SS,no,0,
+Sudan,SD,no,0,
+Suriname,SR,no,0,
+Syria,SY,no,0,
+Tajikistan,TJ,no,0,
+Togo,TG,no,0,
+Tokelau (NZ),TK,no,0,
+Tonga,TO,no,0,
+Trinidad and Tobago,TT,no,0,
+Tunisia,TN,no,0,
+Turkmenistan,TM,no,0,
+Turks and Caicos Islands (UK),TC,no,0,
+Tuvalu,TV,no,0,
+U.S.Virgin Islands (US),VI,no,0,
+Ukraine,UA,no,0,
+Uzbekistan,UZ,no,0,
+Vanuatu,VU,no,0,
+Vatican City,VA,no,0,
+Venezuela,VE,no,0,
+Wallis and Futuna (France),WF,no,0,
+Western Sahara,EH,no,0,
+Yemen,YE,no,0,
+Zambia,ZM,no,0,
+Zimbabwe,ZW,no,0,
