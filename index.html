@@ -1,49 +1,70 @@
 <html>
   <head>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {
-        'packages':['geochart'],
-        'mapsApiKey': 'AIzaSyBArc0dMHQw1ZwpQwMso8IPaT3N6LJVkI4'
+      google.charts.load("current", {
+        packages: ["geochart"],
+        mapsApiKey: "AIzaSyBArc0dMHQw1ZwpQwMso8IPaT3N6LJVkI4",
       });
       google.charts.setOnLoadCallback(loadCSVData);
       function loadCSVData() {
-        fetch('/GenomeInitiativeCountries.csv')
-          .then(response => response.text())
-          .then(csvText => {
+        fetch("/SupplementalFile4.csv")
+          .then((response) => response.text())
+          .then((csvText) => {
             Papa.parse(csvText, {
               header: true,
-              complete: function(results) {
-                const extraData = additionaDataDisplay(results.data, results.meta.fields);
-                drawRegionsMap(results.data, [results.meta.fields[1],results.meta.fields[3]], extraData);
-              }
+              complete: function (results) {
+                const extraData = additionaDataDisplay(
+                  results.data,
+                  results.meta.fields
+                );
+                drawRegionsMap(results.data, results.meta.fields, extraData);
+              },
             });
           });
       }
 
-      // Obtains DataTable for the display menu 
+      // Obtains DataTable for the display menu
       function additionaDataDisplay(data, fields) {
         var extraDataTable = new google.visualization.DataTable();
         const notStringFields = ["project status (number)"];
 
-        fields.forEach(field => {
+        fields.forEach((field) => {
           if (notStringFields.includes(field)) {
-            extraDataTable.addColumn('number', field)
+            extraDataTable.addColumn("number", field);
           } else {
-            extraDataTable.addColumn('string', field)
+            extraDataTable.addColumn("string", field);
           }
-        })
-        
-        data.forEach(row => {
+        });
+
+        data.forEach((row) => {
           extraDataTable.addRow([
-            row[fields[0]], 
-            row[fields[1]], 
-            row[fields[2]], 
-            parseFloat(row[fields[3]]),
-          ])
+            row[fields[0]],
+            row[fields[1]],
+            row[fields[2]],
+            row[fields[3]],
+            row[fields[4]],
+            parseFloat(row[fields[5]]),
+            row[fields[6]],
+            row[fields[7]],
+            row[fields[8]],
+            row[fields[9]],
+            row[fields[10]],
+            row[fields[11]],
+            row[fields[12]],
+            row[fields[13]],
+            row[fields[14]],
+            row[fields[15]],
+          ]);
         });
 
         return extraDataTable;
@@ -51,101 +72,188 @@
 
       // Draws the map from just the "ISO" and "project status" columns
       function drawRegionsMap(data, fields, extra) {
-
         var mapDataArray = [fields.slice(0, 2)];
         var mapDataTable = new google.visualization.DataTable();
-        
-        mapDataTable.addColumn('string', mapDataArray[0][0]);
-        mapDataTable.addColumn('number', mapDataArray[0][1]);
-        data.forEach(row => {
-          mapDataTable.addRow([row[fields[0]], parseFloat(row[fields[1]])]);
-        });
 
+        mapDataTable.addColumn("string", mapDataArray[0][0]);
+        mapDataTable.addColumn("number", mapDataArray[0][1]);
+        data.forEach((row) => {
+          mapDataTable.addRow([row[fields[1]], parseFloat(row[fields[5]])]);
+        });
 
         /**
          * @param selectedItem ...
-         * 
+         *
          * @returns an array of data about the country of interest
          */
         function getCountryInfo(selectedItem) {
           var country_info = [];
-          for (var i=0; i<4; i++) {
+          for (var i = 0; i < 16; i++) {
             country_info.push(extra.getValue(selectedItem, i));
           }
           return country_info;
         }
-        
 
         var options = {
-          colorAxis: {colors: ['#afafaf', '#cc85ad', '#f5b8a3', '#c2ebff', '#d6e085']}, // order: [no, limited scope, H3 Africa, finished, active]
-          legend: 'none',
+          colorAxis: {
+            colors: ["#afafaf", "#cc85ad", "#f5b8a3", "#c2ebff", "#d6e085"],
+          }, // order: [no, limited scope, H3 Africa, finished, active]
+          legend: "none",
         };
 
-        var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+        var chart = new google.visualization.GeoChart(
+          document.getElementById("regions_div")
+        );
         chart.draw(mapDataTable, options);
 
         // event listener for 'select' event
-        google.visualization.events.addListener(chart, 'select', function() {
+        google.visualization.events.addListener(chart, "select", function () {
           var selection = chart.getSelection();
           if (selection.length > 0) {
             var selectedItem = selection[0];
             var countryIso = mapDataTable.getValue(selectedItem.row, 0);
             var active = mapDataTable.getValue(selectedItem.row, 1);
-            showMenu(getCountryInfo(selectedItem.row));
+            showMenu(getCountryInfo(selectedItem.row), fields);
           }
         });
       }
 
-      function showMenu(specifics) {
-        var menu = document.getElementById('info-menu');
-        menu.innerHTML = specifics;
+      function showMenu(specifics, headers) {
+        var menu = document.getElementById("info-menu");
+        menu.innerHTML = "";
 
-        menu.style.display = 'block';
+        var wrapper = document.createElement("div");
+        wrapper.className = "menu-wrapper";
+        // Create a container for the header row (fields)
+        var headerRow = document.createElement("div");
+        headerRow.className = "row-headers";
+
+        // Populate header row with fields
+        headers.forEach((field) => {
+          var headerColumn = document.createElement("span");
+          headerColumn.innerText = field;
+          headerRow.appendChild(headerColumn);
+        });
+        menu.appendChild(headerRow); // Add headers to the menu
+
+        // Create a container for the specifics row
+        var specificsRow = document.createElement("div");
+        specificsRow.className = "row-specifics";
+
+        // Populate specifics row with specifics
+        specifics.forEach((specific) => {
+          var specificsColumn = document.createElement("span");
+
+          console.log(specific);
+          // Check if "specific" contains any URLs
+          if (specific.toString().includes("http")) {
+            console.log(specific);
+            // Check if "specific" contains multiple URLs separated by spaces
+            if (specific.toString().includes(" ")) {
+              var links = specific.split(" "); // Split by space
+              links.forEach((link, idx) => {
+                var linkElement = document.createElement("a");
+                linkElement.href = link;
+                linkElement.innerText = `link ${idx + 1}`; // "link 1", "link 2", etc.
+                linkElement.target = "_blank"; // Open in a new tab
+                specificsColumn.appendChild(linkElement);
+                specificsColumn.appendChild(document.createElement("br")); // Line break between links
+              });
+            } else {
+              // If "specific" contains a single URL
+              var link = document.createElement("a");
+              link.href = specific;
+              link.innerText = "link";
+              link.target = "_blank"; // Open in a new tab
+              specificsColumn.appendChild(link);
+            }
+          }
+
+          // If "specific" does not contain any URLs, treat it as regular text
+          else {
+            specificsColumn.innerText = specific;
+          }
+
+          specificsRow.appendChild(specificsColumn);
+        });
+        menu.appendChild(specificsRow); // Add specifics to the menu
+
+        console.log(menu);
+        menu.style.display = "block"; // Show the menu
       }
     </script>
   </head>
-  
+
   <body>
     <div id="regions_div"></div>
-    <div id=info-menu class="info-menu w3-third">
+    <div id="info-menu" class="info-menu">
       <h2>National Initiative</h2>
       <table class="w3-table w3-striped w3-bordered w3-border">
-        <thead class="w3-teal"><th style="width:30%"></th><th></th></thead>
-        <tr><td style="width:30%"></td><td></td></tr>
-        <tr><td></td><td></td></tr>
-        <tr><td></td><td></td></tr>
-        <tr><td></td><td></td></tr>
+        <thead class="w3-teal">
+          <th style="width: 30%"></th>
+          <th></th>
+        </thead>
+        <tr>
+          <td style="width: 30%"></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+        </tr>
       </table>
-      
-
     </div>
-    
+
     <div class="legend">
-      <h3>National Initiative Status:</h3>
+      <h3>National Project Status:</h3>
       <ul>
         <li>
-          <span class="legend-colorBox" style="background-color: #d6e085;"></span>
+          <span
+            class="legend-colorBox"
+            style="background-color: #d6e085"
+          ></span>
           <span class="legend-text">Active</span>
         </li>
         <li>
-          <span class="legend-colorBox" style="background-color: #c2ebff;"></span>
+          <span
+            class="legend-colorBox"
+            style="background-color: #c2ebff"
+          ></span>
           <span class="legend-text">Finished</span>
         </li>
         <li>
-          <span class="legend-colorBox" style="background-color: #f5b8a3;"></span>
-          <span class="legend-text">H3 Africa</span>
-        </li>
-        <li>
-          <span class="legend-colorBox" style="background-color: #cc85ad;"></span>
+          <span
+            class="legend-colorBox"
+            style="background-color: #f5b8a3"
+          ></span>
           <span class="legend-text">Limited Scope</span>
         </li>
         <li>
-          <span class="legend-colorBox" style="background-color: #afafaf;"></span>
+          <span
+            class="legend-colorBox"
+            style="background-color: #cc85ad"
+          ></span>
+          <span class="legend-text">H3 Africa</span>
+        </li>
+        <li>
+          <span
+            class="legend-colorBox"
+            style="background-color: #afafaf"
+          ></span>
           <span class="legend-text">None</span>
         </li>
       </ul>
     </div>
 
+    <!--
     <div class="dot" id="usa-dot" style="top: 500px; left: 350px;"></div>
     <div class="dot" id="canada-dot" style="top: 390px; left: 320px;"></div>
     <div class="dot" id="brazil-dot" style="top: 720px; left: 560px;"></div>
@@ -158,10 +266,10 @@
     <div class="dot" id="skorea-dot" style="top: 516px; left: 1294px;"></div>
     <div class="dot" id="australia-dot" style="top: 780px; left: 1320px;"></div>
     <div class="dot" id="nz-dot" style="top: 870px; left: 1472px;"></div>
-
+  -->
 
     <div class="notable-initiatives">
-      <h3>Notable Initiatives:</h3>
+      <h3>Notable Projects:</h3>
       <div class="columns">
         <div class="column">
           <h4>North America</h4>
@@ -282,9 +390,8 @@
                 </span>
               </span>
             </li>
-            
           </ul>
-          
+
           <h4>Oceania</h4>
           <ul>
             <li>
@@ -315,14 +422,17 @@
   <style>
     .legend {
       position: sticky;
-      bottom: 10px;
-      left: 10px;
+      bottom: 40px;
+      left: 30px;
       max-width: fit-content;
       border: 1px solid black;
       padding: 10px;
+      padding-top: 0px;
     }
-    h3 {
+    .legend h3 {
+      margin-bottom: 10px;
       margin-top: 0px;
+      font-size: 18pt;
     }
     ul {
       list-style-type: none;
@@ -335,7 +445,10 @@
       margin-bottom: 5px;
     }
     .legend-text {
-      margin-left: 10px;
+      margin-left: 15px;
+    }
+    .legend .legend-text {
+      font-size: 15pt;
     }
     .legend-colorBox {
       height: 2rem;
@@ -343,28 +456,19 @@
       border: 1pt solid black;
       display: inline-block;
     }
-    .info-menu {
-      display: none; 
-      position: absolute; 
-      top: 10px;
-      left: 10px;
-      background-color: white;
-      border: 1px solid black;
-      padding: 10px;
-    }
 
-
-    .notable-initiatives{
+    .notable-initiatives {
+      position: sticky;
       display: flex;
       flex-wrap: wrap;
-      position: sticky;
-      bottom: 10px;
+      bottom: 40px;
       left: 630px;
       max-width: fit-content;
       border: 1px solid black;
       padding: 10px;
+      padding-top: 0px;
     }
-    .notable-initiatives .legend-colorBox{
+    .notable-initiatives .legend-colorBox {
       width: 1rem;
       height: 1rem;
       display: inline-block;
@@ -379,9 +483,17 @@
       padding: 5px;
     }
     .column h4 {
-    font-size: 1rem;
-    font-weight: bold;
-    margin: 5px 0;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .notable-initiatives h3 {
+      font-size: 18pt;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+    .notable-initiatives .legend-text {
+      font-size: 12pt;
     }
     .country-info {
       display: flex;
@@ -398,78 +510,77 @@
       margin-right: 5px;
     }
 
-    
     #usa {
       width: 20px;
       height: 20px;
-      background-color: #3C3B6E;
-      border: 3px solid #B22234;
+      background-color: #3c3b6e;
+      border: 3px solid #b22234;
     }
     #canada {
       width: 20px;
       height: 20px;
-      background-color: #FF0000;
+      background-color: #ff0000;
       border: 3px solid black;
     }
     #finland {
       width: 20px;
       height: 20px;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       border: 3px solid #003580;
     }
     #ireland {
       width: 20px;
       height: 20px;
-      background-color: #169B62;
-      border: 2px solid #FF883E;
+      background-color: #169b62;
+      border: 3px solid #ff883e;
     }
     #egypt {
       width: 20px;
       height: 20px;
       background-color: #000000;
-      border: 3px solid #CE1126;
+      border: 3px solid #ce1126;
     }
     #saudi {
       width: 20px;
       height: 20px;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       border: 3px solid #008753;
     }
     #china {
       width: 20px;
       height: 20px;
-      background-color: #FFDE00;
-      border: 3px solid #FF0000;
+      background-color: #ffde00;
+      border: 3px solid #ff0000;
     }
     #skorea {
       width: 20px;
       height: 20px;
-      background-color: #FFFFFF;
-      border: 3px solid #BC002D;
+      background-color: #ffffff;
+      border: 3px solid #bc002d;
     }
     #brazil {
       width: 20px;
       height: 20px;
-      background-color: #FFDF00;
-      border: 3px solid #009C3B;
+      background-color: #ffdf00;
+      border: 3px solid #009c3b;
     }
     #uruguay {
       width: 20px;
       height: 20px;
-      background-color: #3E6BB7;
-      border: 3px solid #FCD116;
+      background-color: #3e6bb7;
+      border: 3px solid #fcd116;
     }
     #australia {
       width: 20px;
       height: 20px;
-      background-color: #FF0000 ;
-      border: 3px solid #00247D;
+      background-color: #ff0000;
+      border: 3px solid #00247d;
     }
     #nz {
       width: 20px;
       height: 20px;
-      background-color: #00247D;
-      border: 3px solid #CC142B;
+      background-color: #00247d;
+      border: 3px solid #cc142b;
     }
 
     .dot {
@@ -479,76 +590,115 @@
     #usa-dot {
       width: 15px;
       height: 15px;
-      background-color: #3C3B6E;
-      border: 2px solid #B22234;
+      background-color: #3c3b6e;
+      border: 3px solid #b22234;
     }
     #canada-dot {
       width: 15px;
       height: 15px;
-      background-color: #FF0000;
-      border: 2px solid black;
+      background-color: #ff0000;
+      border: 3px solid black;
     }
     #finland-dot {
       width: 15px;
       height: 15px;
-      background-color: #FFFFFF;
+      background-color: #ffffff;
       border: 3px solid #003580;
     }
     #ireland-dot {
       width: 15px;
       height: 15px;
-      background-color: #169B62;
-      border: 2px solid #FF883E;
+      background-color: #169b62;
+      border: 3px solid #ff883e;
     }
     #egypt-dot {
       width: 15px;
       height: 15px;
       background-color: #000000;
-      border: 2px solid #CE1126;
+      border: 3px solid #ce1126;
     }
     #saudi-dot {
       width: 15px;
       height: 15px;
-      background-color: #FFFFFF;
-      border: 3px solid #006C35;
+      background-color: #ffffff;
+      border: 3px solid #006c35;
     }
     #china-dot {
       width: 15px;
       height: 15px;
-      background-color: #FFDE00;
-      border: 3px solid #FF0000;
+      background-color: #ffde00;
+      border: 3px solid #ff0000;
     }
     #skorea-dot {
       width: 15px;
       height: 15px;
-      background-color: #FFFFFF;
-      border: 3px solid #C60C30;
+      background-color: #ffffff;
+      border: 3px solid #c60c30;
     }
     #brazil-dot {
       width: 15px;
       height: 15px;
-      background-color: #FFDF00;
-      border: 3px solid #009C3B;
+      background-color: #ffdf00;
+      border: 3px solid #009c3b;
     }
     #uruguay-dot {
       width: 15px;
       height: 15px;
-      background-color: #3E6BB7;
-      border: 3px solid #FCD116;
+      background-color: #3e6bb7;
+      border: 3px solid #fcd116;
     }
     #australia-dot {
       width: 15px;
       height: 15px;
-      background-color: #FF0000;
-      border: 3px solid #00247D;
+      background-color: #ff0000;
+      border: 3px solid #00247d;
     }
     #nz-dot {
       width: 15px;
       height: 15px;
-      background-color: #00247D;
-      border: 3px solid #CC142B;
+      background-color: #00247d;
+      border: 3px solid #cc142b;
     }
 
-  
+    .info-menu {
+      display: none;
+      flex-direction: column;
+      width: 100%; /* Occupy the full width of the page */
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      box-sizing: border-box; /* Include padding and border in width calculations */
+      background-color: white; /* Background for clarity */
+      border: 1px solid black; /* Optional border for visibility */
+      padding: 10px; /* Optional padding for spacing */
+    }
+
+    .menu-wrapper {
+      display: flex; /* Flexbox container */
+      flex-wrap: wrap; /* Allow wrapping of columns */
+      width: 100%; /* Occupy full width of container */
+      box-sizing: border-box; /* Ensure padding/borders are considered */
+    }
+
+    .row-headers,
+    .row-specifics {
+      display: flex; /* Flex container for rows */
+      width: 100%; /* Ensure rows span the full width */
+    }
+
+    .row-headers span {
+      font-style: italic;
+    }
+
+    .row-headers span,
+    .row-specifics span {
+      flex: 1 0 calc(100% / 16); /* Ensure 16 equally spaced columns */
+      text-align: center; /* Center-align text in columns */
+      padding: 5px; /* Add padding inside each cell */
+      border: 1px solid #ddd; /* Optional border for column separation */
+      word-wrap: break-word; /* Wrap text inside columns */
+      box-sizing: border-box; /* Include padding and borders in width */
+      font-size: 12px; /* Adjust font size for readability */
+    }
   </style>
 </html>
