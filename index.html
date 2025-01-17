@@ -253,13 +253,13 @@
       </ul>
     </div>
 
-    <!--
-    <div class="dot" id="usa-dot" style="top: 500px; left: 350px;"></div>
-    <div class="dot" id="canada-dot" style="top: 390px; left: 320px;"></div>
-    <div class="dot" id="brazil-dot" style="top: 720px; left: 560px;"></div>
-    <div class="dot" id="uruguay-dot" style="top: 818px; left: 534px;"></div>
-    <div class="dot" id="finland-dot" style="top: 340px; left: 870px;"></div>
-    <div class="dot" id="ireland-dot" style="top: 414px; left: 732px;"></div>
+  <!-- Broken because map scaling depends on window size :(
+    <div class="dot" id="usa-dot" style="top: 46vh; left: 23vw;"></div>
+    <div class="dot" id="canada-dot" style="top: 35vh; left: 20vw;"></div>
+    <div class="dot" id="brazil-dot" style="top: 66vh; left: 36vw;"></div>
+    <div class="dot" id="uruguay-dot" style="top: 75.2vh; left: 34.6vw;"></div>
+    <div class="dot" id="finland-dot" style="top: 31vh; left: 56.7vw;"></div>
+    <div class="dot" id="ireland-dot" style="top: 40vh; left: 46vw;"></div>
     <div class="dot" id="egypt-dot" style="top: 558px; left: 886px;"></div>
     <div class="dot" id="saudi-dot" style="top: 568px; left: 946px;"></div>
     <div class="dot" id="china-dot" style="top: 525px; left: 1186px;"></div>
@@ -267,7 +267,6 @@
     <div class="dot" id="australia-dot" style="top: 780px; left: 1320px;"></div>
     <div class="dot" id="nz-dot" style="top: 870px; left: 1472px;"></div>
   -->
-
     <div class="notable-initiatives">
       <h3>Notable Projects:</h3>
       <div class="columns">
@@ -421,8 +420,7 @@
   </body>
   <style>
     .legend {
-      position: sticky;
-      bottom: 40px;
+      position: absolute;
       left: 30px;
       max-width: fit-content;
       border: 1px solid black;
@@ -458,11 +456,10 @@
     }
 
     .notable-initiatives {
-      position: sticky;
+      position: absolute;
       display: flex;
       flex-wrap: wrap;
-      bottom: 40px;
-      left: 630px;
+      right: 40px;
       max-width: fit-content;
       border: 1px solid black;
       padding: 10px;
