@@ -1,63 +1,66 @@
-Country,ISO 3166-1 alpha-2 Code,Project Name,Website,national genomic project status,project status (number),planned WES and/or genome analyses,personalized and precision medicine statement,Infrastructure,Funding type,Data Sharing Goals & Methods,Data Management,Linkages,Establishment or Linkage with Existing Biobank(s),Biobank Link,Linkage with Medical Data
-Armenia,AM,Armenian Genome,http://armeniangenome.am/,active,1,N/A,1,N/A,Mixed,N/A,N/A,N/A,N/A,N/A,N/A
+Country,ISO 3166-1 alpha-2 Code,Project Name,Website / Publication,national genomic project status,project status (number),planned WES and/or genome analyses,personalized and precision medicine statement,Infrastructure,Funding type,Data Sharing Goals & Methods,Data Management,Linkages,Establishment or Linkage with Existing Biobank(s),Biobank Link,Linkage with Medical Data
 Australia,AU,Australian genomics,https://www.australiangenomics.org.au/,active,1,25000,1,1,Mixed,1,1,1,1,Planned,1
-Bahrain,BH,National Genome Center,https://www.moh.gov.bh/GenomeProject?lang=en,active,1,N/A,1,N/A,Public,1,N/A,1,1,https://www.moh.gov.bh/GenomeProject?lang=en,1
+New Zealand,NZ,Genomics Aotearoa,https://www.genomics-aotearoa.org.nz/projects/aotearoa-nz-genomic-variome https://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=12289887 https://www.genomics-aotearoa.org.nz/our-work/health-projects,active,1,600,1,1,Public,1,1,1,1,Planned,1
 Bangladesh,BD,N/A,https://www.dhakatribune.com/science/2019/01/16/human-genome-sequencing-research-begins-in-bangladesh https://www.genomeweb.com/sequencing/bangladesh-unveils-whole-genome-sequencing-program#.Xr041sBvGUk,active,1,100,N/A,N/A,Public,N/A,N/A,N/A,N/A,N/A,N/A
-Brazil,BR,Brazilian initiative on precision medicine,https://bipmed.org/ https://www1.folha.uol.com.br/internacional/en/scienceandhealth/2019/12/project-will-map-genome-of-15-thousand-brazilians.shtml https://epigen.grude.ufmg.br/,active,1,15000,1,1,Public,1,1,1,N/A,N/A,1
 Canada,CA,Personal Genome Project Canada (PGP-Canada),https://personalgenomes.ca/ https://www.genomecanada.ca/en,active,1,130000,1,1,Mixed,1,1,1,1,http://tcag.ca/facilities/biobanking.html,1
+Mexico,MX,oriGen,https://tecscience.tec.mx/en/interactives/origen-project/,active,1,100000,N/A,N/A,Mixed,1,N/A,1,1,https://mxbiobankproject.org/,1
+United States,US,All of Us,https://allofus.nih.gov/,active,1,1000000,1,1,Mixed,1,1,1,1,https://allofus.nih.gov/funding-and-program-partners/biobank,1
+Brazil,BR,Brazilian initiative on precision medicine,https://bipmed.org/ https://www1.folha.uol.com.br/internacional/en/scienceandhealth/2019/12/project-will-map-genome-of-15-thousand-brazilians.shtml https://epigen.grude.ufmg.br/,active,1,15000,1,1,Public,1,1,1,N/A,N/A,1
+Uruguay,UY,Urugenome,https://pasteur.uy/en/news/ip-montevideo-aims-to-genetically-characterize-the-uruguayan-population/,active,1,850,N/A,1,Mixed,1,N/A,N/A,N/A,N/A,N/A
+Egypt,EG,An Egyptian Genome Reference (EgyptRef),https://www.egyptian-genome.org/,active,1,110,N/A,N/A,Public + EU,1,N/A,N/A,N/A,N/A,N/A
+Nigeria,NG,100 K Nigerian genome project / H3 Africa,https://www.nature.com/articles/s41588-022-01071-6,active,1,100000,1,1,Mixed,1,1,1,N/A,N/A,1
+Tunisia,TN,Genome Tunisia Project,https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-024-01365-w,active,1,10000,1,1,Public,1,1,1,1,Planned,1
+Bahrain,BH,National Genome Center,https://www.moh.gov.bh/GenomeProject?lang=en,active,1,N/A,1,N/A,Public,1,N/A,1,1,https://www.moh.gov.bh/GenomeProject?lang=en,1
+Iran,IR,Iranome,http://www.iranome.ir/ https://onlinelibrary.wiley.com/doi/abs/10.1002/humu.23880,active,1,1202,1,N/A,Public,1,N/A,1,N/A,N/A,N/A
+Qatar,QA,Qatar Precision Health Institute,https://www.qphi.org.qa/,active,1,40000,1,1,Private,1,1,1,1,https://www.qphi.org.qa/DataCatalog,1
+Saudi Arabia,SA,The Saudi Genome Program (SGP),https://www.vision2030.gov.sa/en/explore/projects/the-saudi-genome-program,active,1,100000,1,1,Mixed,1,N/A,1,N/A,N/A,1
+United Arab Emirates,AE,Center for Arab Genomic Studies,http://www.cags.org.ae/,active,1,1000,1,N/A,Public,1,N/A,1,N/A,N/A,1
+Armenia,AM,Armenian Genome,http://armeniangenome.am/,active,1,N/A,1,N/A,Mixed,N/A,N/A,N/A,N/A,N/A,N/A
+Turkey,TR,Turkish genome project,https://tgd.tuseb.gov.tr/en/,active,1,N/A,1,1,Public + EU,1,1,1,1,https://bbmri.ibg.edu.tr/,1
 China,CN,N/A,https://bigd.big.ac.cn/gwh/ https://bigd.big.ac.cn/ https://bigd.big.ac.cn/vcg/index.html https://futurism.com/neoscope/chinese-province-sequencing-1-million-residents-genomes,active,1,100000000,1,1,Mixed,1,N/A,1,1,https://bigd.big.ac.cn/biosample/,1
+Hong Kong (China),HK,Hong Kong Genome Project (HKGP),https://hkgp.org/en/understand-hkgp/about-the-project/,active,1,20000,1,1,Public,1,1,1,1,Planned,1
+India,IN,GenomeIndia,https://genomeindia.in/,active,1,10000,1,1,Mixed,1,N/A,1,1,Planned,1
+Japan,JP,Japan Genomic Medicine Program,https://www.amed.go.jp/en/program/index05.html https://www.amed.go.jp/en/program/index04.html,active,1,250000,1,1,Public,1,1,1,1,https://www.amed.go.jp/en/program/index04.html,1
+Singapore,SG,Singapore 100K Genome Project,https://www.npm.sg/news-and-events/editorial-features/sg100k-translating-insights-from-100000-genomic-data-sets/ https://genomeasia100k.org/,active,1,150000,1,N/A,Mixed,1,1,1,N/A,N/A,1
+South Korea,KR,Korean Genome Project,http://opengenome.net/Main_Page http://koreangenome.org/10K_Korean_Genome_Project,active,1,50000000,1,N/A,Mixed,1,1,1,1,http://opengenome.net/Main_Page,1
+Taiwan,TW,G2020 Population Genomics Pilot,http://enews.nhri.org.tw/en/?p=858,active,1,10000,1,1,Mixed,1,N/A,1,N/A,N/A,1
+Vietnam,VN,Vietnam Genome Project,https://genomes.vn/ https://vgpvn.org/,active,1,1000,1,N/A,Private,1,N/A,1,N/A,N/A,1
+Thailand,TH,Genomics Thailand,https://genomicsthailand.com/#,active,1,N/A,1,1,Public,1,1,N/A,N/A,N/A,1
+Austria,AT,Genom Austria / EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://bbmri.at/,1
+Belgium,BE,Belgian Genome Biobank / EU 1+ Million Genomes,https://www.elixir-belgium.org/projects/belgian-genome-biobank https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,Planned,1
 Cyprus,CY,Cyprus Human Genome Project / EU 1+ Million Genomes,https://www.cyprusgenome.org/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,10000,1,1,Public,1,1,1,1,https://biobank.cy/the-repository/,1
 Czech Republic,CZ,EU 1+ Million Genomes,https://ncmg.cz/en/#section-projects https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,1055,1,N/A,Public,1,N/A,N/A,N/A,N/A,N/A
 Denmark,DK,Genome Denmark / EU 1+ Million Genomes,http://www.genomedenmark.dk/english/ https://www.fargen.fo/en/research/faroese-reference-genome/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,1650,1,1,Mixed,1,1,1,1,https://www.danishnationalbiobank.com/access,1
-Egypt,EG,An Egyptian Genome Reference (EgyptRef),https://www.egyptian-genome.org/,active,1,110,N/A,N/A,Public + EU,1,N/A,N/A,N/A,N/A,N/A
 Estonia,EE,The Estonian genome project / EU 1+ Million Genomes,https://genomics.ut.ee/en/content/estonian-genome-centre https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,430000,1,1,Public,1,1,1,1,https://genomics.ut.ee/en/access-biobank,1
-Finland,FI,National Genome Strategy / EU 1+ Million Genomes,https://www.nature.com/articles/s41586-022-05473-8 https://www.finngen.fi/en https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,500000,1,1,Mixed,1,1,1,1,https://www.biopankki.fi/en/finnish-biobanks/,1
-France,FR,Plan France Medecine Genomique 2025 / EU 1+ Million Genomes,https://pfmg2025.aviesan.fr https://laboratoire-seqoia.fr/nos-activites/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,235000,1,1,Mixed,1,1,1,N/A,N/A,1
-Hong Kong (China),HK,Hong Kong Genome Project (HKGP),https://hkgp.org/en/understand-hkgp/about-the-project/,active,1,20000,1,1,Public,1,1,1,1,Planned,1
-Iran,IR,Iranome,http://www.iranome.ir/ https://onlinelibrary.wiley.com/doi/abs/10.1002/humu.23880,active,1,1202,1,N/A,Public,1,N/A,1,N/A,N/A,N/A
-Ireland,IE,Genomics Medicine Ireland / EU 1+ Million Genomes,https://genomicsmed.ie/how-you-can-help/ https://phi.genuitysci.com/research-studies/about-our-research/ https://www.irishtimes.com/business/technology/ireland-s-national-genome-project-should-not-be-in-private-control-1.4097278 https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,400000,1,N/A,Private,1,1,1,N/A,N/A,1
-Japan,JP,Japan Genomic Medicine Program,https://www.amed.go.jp/en/program/index05.html https://www.amed.go.jp/en/program/index04.html,active,1,250000,1,1,Public,1,1,1,1,https://www.amed.go.jp/en/program/index04.html,1
-Latvia,LV,Genome Database of the Latvian Population (LGDB) / EU 1+ Million Genomes,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6048300/ https://www.genomadatubaze.lv/en/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,3769,1,1,Public,1,1,1,1,https://www.genomadatubaze.lv/en/,1
-Malta,MT,Malta Human Genome Project / EU 1+ Million Genomes,https://www.bbmri-eric.eu/national-nodes/malta/ https://www.researchgate.net/publication/327954831_Malta_Human_Genome_Project https://www.um.edu.mt/newspoint/news/2023/06/dwarna-launch-biobanking-research-maltese-genome https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,4200,1,N/A,Public,1,N/A,1,1,https://www.um.edu.mt/biobank,1
-Mexico,MX,oriGen,https://tecscience.tec.mx/en/interactives/origen-project/,active,1,100000,N/A,N/A,Mixed,1,N/A,1,1,https://mxbiobankproject.org/,1
-Netherlands,NL,GoNL / EU 1+ Million Genomes,http://www.nlgenome.nl/ https://www.nature.com/articles/ejhg2013118 https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,750,1,1,Mixed,1,1,1,1,https://www.bbmri.nl/,1
-New Zealand,NZ,Genomics Aotearoa,https://www.genomics-aotearoa.org.nz/projects/aotearoa-nz-genomic-variome https://www.nzherald.co.nz/nz/news/article.cfm?c_id=1&objectid=12289887 https://www.genomics-aotearoa.org.nz/our-work/health-projects,active,1,600,1,1,Public,1,1,1,1,Planned,1
-Poland,PL,Genomic Map of Poland / EU 1+ Million Genomes,http://www.ecbig.pl/page/genomic-map-of-poland/ https://www.genomept.pt/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,5000,1,N/A,Public + EU,N/A,N/A,N/A,N/A,N/A,N/A
-Portugal,PT,GenomePT / EU 1+ Million Genomes,https://www.genomept.pt/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,N/A,1,Public + EU,N/A,N/A,N/A,N/A,N/A,N/A
-Qatar,QA,Qatar Precision Health Institute,https://www.qphi.org.qa/,active,1,40000,1,1,Private,1,1,1,1,https://www.qphi.org.qa/DataCatalog,1
-Saudi Arabia,SA,The Saudi Genome Program (SGP),https://www.vision2030.gov.sa/en/explore/projects/the-saudi-genome-program,active,1,100000,1,1,Mixed,1,N/A,1,N/A,N/A,1
-Singapore,SG,Singapore 100K Genome Project,https://www.npm.sg/news-and-events/editorial-features/sg100k-translating-insights-from-100000-genomic-data-sets/ https://genomeasia100k.org/,active,1,150000,1,N/A,Mixed,1,1,1,N/A,N/A,1
-Slovenia,SI,Slovene Genome Project / EU 1+ Million Genomes,https://www.mf.uni-lj.si/en_GB/news/launching-slovenian-genome-project-slovenia-joins-global-initiative-improving-health?q=%2Fen_GB%2Fnews%2Flaunching-slovenian-genome-project-slovenia-joins-global-initiative-improving-health https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,300,1,N/A,Public,1,1,1,1,Planned,1
-South Korea,KR,Korean Genome Project,http://opengenome.net/Main_Page http://koreangenome.org/10K_Korean_Genome_Project,active,1,50000000,1,N/A,Mixed,1,1,1,1,http://opengenome.net/Main_Page,1
-Switzerland,CH,Swiss Personalized Health Network (SPHN),https://sphn.ch/ https://www.health2030genome.ch/about/ ,active,1,N/A,1,1,Mixed,1,1,1,1,https://swissbiobanking.ch/,1
-Taiwan,TW,G2020 Population Genomics Pilot,http://enews.nhri.org.tw/en/?p=858,active,1,10000,1,1,Mixed,1,N/A,1,N/A,N/A,1
-Thailand,TH,Genomics Thailand,https://genomicsthailand.com/#,active,1,N/A,1,1,Public,1,1,N/A,N/A,N/A,1
-Turkey,TR,Turkish genome project,https://tgd.tuseb.gov.tr/en/,active,1,N/A,1,1,Public + EU,1,1,1,1,https://bbmri.ibg.edu.tr/,1
-United Kingdom,GB,"Genomics England / 100,000 GP / EU 1+ Million Genomes",https://www.genomicsengland.co.uk/,active,1,100000,1,1,Mixed,1,1,1,1,https://www.ukbiobank.ac.uk/,1
-United Arab Emirates,AE,Center for Arab Genomic Studies,http://www.cags.org.ae/,active,1,1000,1,N/A,Public,1,N/A,1,N/A,N/A,1
-Uruguay,UY,Urugenome,https://pasteur.uy/en/news/ip-montevideo-aims-to-genetically-characterize-the-uruguayan-population/,active,1,850,N/A,1,Mixed,1,N/A,N/A,N/A,N/A,N/A
-United States,US,All of Us,https://allofus.nih.gov/,active,1,1000000,1,1,Mixed,1,1,1,1,https://allofus.nih.gov/funding-and-program-partners/biobank,1
-Vietnam,VN,Vietnam Genome Project,https://genomes.vn/ https://vgpvn.org/,active,1,1000,1,N/A,Private,1,N/A,1,N/A,N/A,1
 Germany,DE,genomeDE / EU 1+ Million Genomes,https://www.bundesgesundheitsministerium.de/en/en/international/european-health-policy/genomde-en https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://www.bbmri.de/,1
-Belgium,BE,Belgian Genome Biobank / EU 1+ Million Genomes,https://www.elixir-belgium.org/projects/belgian-genome-biobank https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,Planned,1
-India,IN,GenomeIndia,https://genomeindia.in/,active,1,10000,1,1,Mixed,1,N/A,1,1,Planned,1
-Austria,AT,Genom Austria / EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://bbmri.at/,1
 Italy,IT,Italian Institute for Genomic Medicine / EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi https://humantechnopole.it/en/news/italy-at-the-centre-of-the-genome-of-europe-project/,active,1,15800,1,1,Public + EU,1,1,1,1,Planned,1
 Serbia,RS,EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,Planned,1
 Bulgaria,BG,EU 1+ Million Genomes,https://nucbtr.mu-sofia.bg/en/news/genomat-na-balgaria https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,1000,1,1,Public + EU,1,1,1,1,Planned,1
 Croatia,HR,EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://mefst.unist.hr/research/research-groups-and-laboratories/10-001-dalmatian-croatian-biobank/5038,1
+France,FR,Plan France Medecine Genomique 2025 / EU 1+ Million Genomes,https://pfmg2025.aviesan.fr https://laboratoire-seqoia.fr/nos-activites/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,235000,1,1,Mixed,1,1,1,N/A,N/A,1
+Finland,FI,National Genome Strategy / EU 1+ Million Genomes,https://www.nature.com/articles/s41586-022-05473-8 https://www.finngen.fi/en https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,500000,1,1,Mixed,1,1,1,1,https://www.biopankki.fi/en/finnish-biobanks/,1
 Greece,GR,GiGreece / EU 1+ Million Genomes,https://www.gogreece.org.gr/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,Planned,1
 Hungary,HU,EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,Planned,1
+Ireland,IE,Genomics Medicine Ireland / EU 1+ Million Genomes,https://genomicsmed.ie/how-you-can-help/ https://phi.genuitysci.com/research-studies/about-our-research/ https://www.irishtimes.com/business/technology/ireland-s-national-genome-project-should-not-be-in-private-control-1.4097278 https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,400000,1,N/A,Private,1,1,1,N/A,N/A,1
+Latvia,LV,Genome Database of the Latvian Population (LGDB) / EU 1+ Million Genomes,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6048300/ https://www.genomadatubaze.lv/en/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,3769,1,1,Public,1,1,1,1,https://www.genomadatubaze.lv/en/,1
 Lithuania,LT,EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://www.nvi.lt/biobank/,1
 Luxembourg,LU,EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://researchportal.lih.lu/en/organisations/integrated-biobank-of-luxembourg,1
+Malta,MT,Malta Human Genome Project / EU 1+ Million Genomes,https://www.bbmri-eric.eu/national-nodes/malta/ https://www.researchgate.net/publication/327954831_Malta_Human_Genome_Project https://www.um.edu.mt/newspoint/news/2023/06/dwarna-launch-biobanking-research-maltese-genome https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,4200,1,N/A,Public,1,N/A,1,1,https://www.um.edu.mt/biobank,1
+Netherlands,NL,GoNL / EU 1+ Million Genomes,http://www.nlgenome.nl/ https://www.nature.com/articles/ejhg2013118 https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,750,1,1,Mixed,1,1,1,1,https://www.bbmri.nl/,1
 Norway,NO,EU 1+ Million Genomes,https://www.genomept.pt/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://bbmri.no/,1
+Poland,PL,Genomic Map of Poland / EU 1+ Million Genomes,http://www.ecbig.pl/page/genomic-map-of-poland/ https://www.genomept.pt/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,5000,1,N/A,Public + EU,N/A,N/A,N/A,N/A,N/A,N/A
+Portugal,PT,GenomePT / EU 1+ Million Genomes,https://www.genomept.pt/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,N/A,1,Public + EU,N/A,N/A,N/A,N/A,N/A,N/A
 Romania,RO,EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,Planned,1
+Slovenia,SI,Slovene Genome Project / EU 1+ Million Genomes,https://www.mf.uni-lj.si/en_GB/news/launching-slovenian-genome-project-slovenia-joins-global-initiative-improving-health?q=%2Fen_GB%2Fnews%2Flaunching-slovenian-genome-project-slovenia-joins-global-initiative-improving-health https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,300,1,N/A,Public,1,1,1,1,Planned,1
 Spain,ES,EU 1+ Million Genomes,https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://www.isciiibiobanksbiomodels.es/en/,1
 Sweden,SE,EU 1+ Million Genomes,https://genomicmedicine.se/en/ https://gdi.onemilliongenomes.eu/news/eighteen-months-of-gdi,active,1,N/A,1,1,Public + EU,1,1,1,1,https://biobanksverige.se/en/about-biobank-sweden/,1
+Switzerland,CH,Swiss Personalized Health Network (SPHN),https://sphn.ch/ https://www.health2030genome.ch/about/ ,active,1,N/A,1,1,Mixed,1,1,1,1,https://swissbiobanking.ch/,1
+United Kingdom,GB,"Genomics England / 100000 GP / EU 1+ Million Genomes",https://www.genomicsengland.co.uk/,active,1,100000,1,1,Mixed,1,1,1,1,https://www.ukbiobank.ac.uk/,1
+Chile,CL,Genomics of the Chilean Population (FONDEF),http://chilegenomico.med.uchile.cl/chilegenomico1/ http://www.genomacrg.cl/ http://www.1000genomas.cl/,finished,0.7,3000,N/A,N/A,Mixed,1,N/A,N/A,N/A,N/A,N/A
+Gambia,GM,Gambian genome project / H3 Africa,https://wellcomeopenresearch.org/articles/6-239,finished / limited scope-H3 Africa,0.7,505,0,0,Mixed,1,1,1,1,https://www.internationalgenome.org/data-portal/data-collection/ggvp-grch38,0
 Greenland (Denmark),GL,N/A,https://www.nature.com/articles/nature08835,finished,0.7,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Iceland,IS,N/A,https://www.nature.com/articles/ng.3247,finished,0.7,2636,1,N/A,Mixed,1,1,0,0,N/A,1
 Peru,PE,Peruvian Genome Project,https://www.medrxiv.org/content/10.1101/2024.05.05.24306840v1,finished,0.7,150,1,1,Mixed,1,1,1,1,https://www.ebi.ac.uk/ega/home,1
-Chile,CL,Genomics of the Chilean Population (FONDEF),http://chilegenomico.med.uchile.cl/chilegenomico1/ http://www.genomacrg.cl/ http://www.1000genomas.cl/,finished,0.7,3000,N/A,N/A,Mixed,1,N/A,N/A,N/A,N/A,N/A
 Russia,RU,Genome Russia Project,http://genomerussia.spbu.ru/?lang=en,finished,0.7,3000,1,N/A,Public,1,1,1,1,https://researchpark.spbu.ru/en/biobank-eng,1
 Argentina,AR,N/A,https://humgenomics.biomedcentral.com/articles/10.1186/s40246-021-00315-6,limited scope,0.5,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 DR Congo,CD,N/A,https://humgenomics.biomedcentral.com/articles/10.1186/s40246-021-00315-6,limited scope,0.5,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
@@ -83,14 +86,12 @@ Honduras,HN,N/A,https://www.genome.gov/10001688/international-hapmap-project,lim
 Puerto Rico (US),PR,N/A,https://www.genome.gov/10001688/international-hapmap-project,limited scope,0.5,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Papua New Guinea,PG,N/A,https://science.sciencemag.org/content/357/6356/1160,limited scope,0.5,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Botswana,BW,N/A,https://pubmed.ncbi.nlm.nih.gov/29706352/,limited scope,0.5,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-Uganda,UG,H3 Africa,"https://h3africa.org/#:~:text=The%20Human%20Heredity%20and%20Health,the%20health%20of%20African%20populations.",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-Gambia,GM,H3 Africa,"https://h3africa.org/#:~:text=The%20Human%20Heredity%20and%20Health,the%20health%20of%20African%20populations.",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-Ghana,GH,H3 Africa,"https://h3africa.org/#:~:text=The%20Human%20Heredity%20and%20Health,the%20health%20of%20African%20populations.",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-Kenya,KE,H3 Africa,"https://h3africa.org/#:~:text=The%20Human%20Heredity%20and%20Health,the%20health%20of%20African%20populations.",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-Nigeria,NG,H3 Africa,"https://h3africa.org/#:~:text=The%20Human%20Heredity%20and%20Health,the%20health%20of%20African%20populations.",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-South Africa,ZA,H3 Africa,"https://h3africa.org/#:~:text=The%20Human%20Heredity%20and%20Health,the%20health%20of%20African%20populations.",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-Tanzania,TZ,H3 Africa,"https://h3africa.org/#:~:text=The%20Human%20Heredity%20and%20Health,the%20health%20of%20African%20populations.",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-Central African Republic,CF,H3 Africa,"https://h3africa.org/#:~:text=The%20Human%20Heredity%20and%20Health,the%20health%20of%20African%20populations.",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+Uganda,UG,H3 Africa,"https://h3africa.org/",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+Ghana,GH,H3 Africa,"https://h3africa.org/",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+Kenya,KE,H3 Africa,"https://h3africa.org/",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+South Africa,ZA,H3 Africa,"https://h3africa.org/",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+Tanzania,TZ,H3 Africa,"https://h3africa.org/",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
+Central African Republic,CF,H3 Africa,"https://h3africa.org/",limited scope-H3 Africa,0.3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Afghanistan,AF,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Albania,AL,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Algeria,DZ,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
@@ -217,7 +218,6 @@ Togo,TG,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Tokelau (NZ),TK,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Tonga,TO,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Trinidad and Tobago,TT,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
-Tunisia,TN,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Turkmenistan,TM,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Turks and Caicos Islands (UK),TC,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
 Tuvalu,TV,N/A,N/A,no,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A
