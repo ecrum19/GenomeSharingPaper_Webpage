@@ -212,7 +212,7 @@
       </table>
     </div>
 
-    <div class="legend">
+    <div class="legend colors">
       <h3>National Project Status:</h3>
       <ul>
         <li>
@@ -220,35 +220,35 @@
             class="legend-colorBox"
             style="background-color: #d6e085"
           ></span>
-          <span class="legend-text">Active</span>
+          <span class="color-legend-text">Active</span>
         </li>
         <li>
           <span
             class="legend-colorBox"
             style="background-color: #c2ebff"
           ></span>
-          <span class="legend-text">Finished</span>
+          <span class="color-legend-text">Finished</span>
         </li>
         <li>
           <span
             class="legend-colorBox"
             style="background-color: #f5b8a3"
           ></span>
-          <span class="legend-text">Limited Scope</span>
+          <span class="color-legend-text">Limited Scope</span>
         </li>
         <li>
           <span
             class="legend-colorBox"
             style="background-color: #cc85ad"
           ></span>
-          <span class="legend-text">H3 Africa</span>
+          <span class="color-legend-text">H3 Africa</span>
         </li>
         <li>
           <span
             class="legend-colorBox"
             style="background-color: #afafaf"
           ></span>
-          <span class="legend-text">None</span>
+          <span class="color-legend-text">None</span>
         </li>
       </ul>
     </div>
@@ -277,6 +277,16 @@
                   <span class="info-right">
                     <i class="fas fa-dna"></i>
                     <span>130 K</span>
+                  </span>
+                </span>
+              </li>
+              <li>
+                <span class="legend-colorBox" id="mexico"></span>
+                <span class="country-info">
+                  <span class="legend-text">Mexico</span>
+                  <span class="info-right">
+                    <i class="fas fa-dna"></i>
+                    <span>100 K</span>
                   </span>
                 </span>
               </li>
@@ -328,6 +338,16 @@
                   </span>
                 </span>
               </li>
+              <li>
+                <span class="legend-colorBox" id="uk"></span>
+                <span class="country-info">
+                  <span class="legend-text">United Kingdom</span>
+                  <span class="info-right">
+                    <i class="fas fa-dna"></i>
+                    <span>100 K</span>
+                  </span>
+                </span>
+              </li>
             </ul>
             <h4>Africa / Middle East</h4>
             <ul>
@@ -376,6 +396,16 @@
                   </span>
                 </span>
               </li>
+              <li>
+                <span class="legend-colorBox" id="japan"></span>
+                <span class="country-info">
+                  <span class="legend-text">Japan</span>
+                  <span class="info-right">
+                    <i class="fas fa-dna"></i>
+                    <span>250 K</span>
+                  </span>
+                </span>
+              </li>
             </ul>
 
             <h4>Oceania</h4>
@@ -407,33 +437,70 @@
     </div>
 
     <!-- Broken because map scaling depends on window size :( -->
-    <!-- <div class="dot" id="usa-dot" style="top: 550px; left: 395px;"></div>
-    <div class="dot" id="canada-dot" style="top: 450px; left: 395px;"></div>
-    <div class="dot" id="brazil-dot" style="top: 795px; left: 610px;"></div>
-    <div class="dot" id="uruguay-dot" style="top: 891px; left: 584px;"></div>
-    <div class="dot" id="finland-dot" style="top: 370px; left: 956px;"></div>
-    <div class="dot" id="ireland-dot" style="top: 450px; left: 800px;"></div>
-    <div class="dot" id="egypt-dot" style="top: 610px; left: 970px;"></div>
-    <div class="dot" id="saudi-dot" style="top: 618px; left: 1030px;"></div>
-    <div class="dot" id="china-dot" style="top: 575px; left: 1286px;"></div>
-    <div class="dot" id="skorea-dot" style="top: 560px; left: 1414px;"></div>
-    <div class="dot" id="australia-dot" style="top: 855px; left: 1450px;"></div>
-    <div class="dot" id="nz-dot" style="top: 950px; left: 1612px;"></div> -->
-    
+    <!-- <div class="dot" id="usa-dot" style="top: 820px; left: 575px"></div>
+    <div class="dot" id="canada-dot" style="top: 670px; left: 575px"></div>
+    <div class="dot" id="mexico-dot" style="top: 955px; left: 575px"></div>
+
+    <div class="dot" id="brazil-dot" style="top: 1195px; left: 910px"></div>
+    <div class="dot" id="uruguay-dot" style="top: 1330px; left: 870px"></div>
+
+    <div class="dot" id="finland-dot" style="top: 550px; left: 1425px"></div>
+    <div class="dot" id="ireland-dot" style="top: 680px; left: 1195px"></div>
+    <div class="dot" id="uk-dot" style="top: 690px; left: 1235px"></div>
+
+    <div class="dot" id="egypt-dot" style="top: 915px; left: 1450px"></div>
+    <div class="dot" id="saudi-dot" style="top: 940px; left: 1550px"></div>
+
+    <div class="dot" id="china-dot" style="top: 850px; left: 1920px"></div>
+    <div class="dot" id="skorea-dot" style="top: 837px; left: 2108px"></div>
+    <div class="dot" id="japan-dot" style="top: 845px; left: 2175px"></div>
+
+    <div class="dot" id="australia-dot" style="top: 1275px; left: 2165px"></div>
+    <div class="dot" id="nz-dot" style="top: 1425px; left: 2395px"></div> -->
   </body>
   <style>
     .legend {
       position: absolute;
-      left: 30px;
-      max-width: fit-content;
+      min-width: 320px;
       border: 1px solid black;
-      padding: 10px;
+      padding: 22px 28px 20px 28px;
       padding-top: 0px;
+      font-size: 1.15em;
+    }
+    .legend,
+    .notable-initiatives {
+      background: #f6f7f9; /* subtle neutral background */
+      border: 1px solid #d3d3d3;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      padding: 18px 20px 16px 20px;
     }
     .legend h3 {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       margin-top: 0px;
-      font-size: 18pt;
+      font-size: 22pt;
+      font-weight: 700;
+      color: #2c3e50;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 6px;
+    }
+    .notable-initiatives h3 {
+      margin-bottom: 12px;
+      margin-top: 0px;
+      font-size: 22pt;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+    .colors {
+      left: 100px;
+      top: 1550px;
+    }
+    .notable-initiatives {
+      position: absolute;
+      left: 1400px;
+      top: 1500px;
+      width: 1000px;
+      /* inherits background, border, etc. from previous rules */
     }
     ul {
       list-style-type: none;
@@ -443,60 +510,63 @@
     li {
       display: flex;
       align-items: center;
-      margin-bottom: 5px;
+      margin-bottom: 7px;
     }
     .legend-text {
       margin-left: 15px;
+      min-width: fit-content;
     }
-    .legend .legend-text {
+    .legend .legend-text,
+    .notable-initiatives .legend-text {
       font-size: 15pt;
+      color: #34495e;
+    }
+    .color-legend-text {
+      margin-left: 20px;
+      min-width: fit-content;
+      font-size: 18pt;
+      color: #34495e;
+      font-weight: 500;
     }
     .legend-colorBox {
-      height: 2rem;
-      width: 2rem;
-      border: 1pt solid black;
+      height: 2.2rem;
+      width: 2.2rem;
+      border: 1.5pt solid #bdbdbd;
       display: inline-block;
-    }
-
-    .container {
-      position: static;
-      margin-left: 900px;
-      margin-bottom: 200px;
-    }
-    .notable-initiatives {
-      display: flex;
-      flex-wrap: wrap;
-      max-width: fit-content;
-      border: 1px solid black;
-      padding: 10px;
-      padding-top: 0px;
+      border-radius: 8px;
+      background-clip: padding-box;
+      margin-right: 8px;
     }
     .notable-initiatives .legend-colorBox {
-      width: 1rem;
-      height: 1rem;
+      height: 2rem;
+      width: 2rem;
+      border: 1pt solid #bdbdbd;
       display: inline-block;
       border-radius: 50%;
+      background-clip: padding-box;
     }
+
     .columns {
       display: flex;
       width: 100%;
+      border-top: 1px solid #e0e0e0;
     }
     .column {
       flex: 1;
-      padding: 5px;
+      padding: 10px 12px;
+      border-right: 1px solid #e0e0e0;
+      background: transparent;
+    }
+    .column:last-child {
+      border-right: none;
     }
     .column h4 {
       font-size: 1.2rem;
       font-weight: bold;
-      margin: 10px 0;
-    }
-    .notable-initiatives h3 {
-      font-size: 18pt;
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-    .notable-initiatives .legend-text {
-      font-size: 12pt;
+      margin: 10px 0 12px 0;
+      color: #2c3e50;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 4px;
     }
     .country-info {
       display: flex;
@@ -525,6 +595,12 @@
       background-color: #ff0000;
       border: 3px solid black;
     }
+    #mexico {
+      width: 20px;
+      height: 20px;
+      background-color: #ffffff;
+      border: 3px solid #006847;
+    }
     #finland {
       width: 20px;
       height: 20px;
@@ -536,6 +612,12 @@
       height: 20px;
       background-color: #169b62;
       border: 3px solid #ff883e;
+    }
+    #uk {
+      width: 20px;
+      height: 20px;
+      background-color: #012169;
+      border: 3px solid #c8102e;
     }
     #egypt {
       width: 20px;
@@ -554,6 +636,12 @@
       height: 20px;
       background-color: #ffde00;
       border: 3px solid #ff0000;
+    }
+    #japan {
+      width: 20px;
+      height: 20px;
+      background-color: #bc002d;
+      border: 3px solid #ffffff;
     }
     #skorea {
       width: 20px;
@@ -602,6 +690,12 @@
       background-color: #ff0000;
       border: 3px solid black;
     }
+    #mexico-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #ffffff;
+      border: 3px solid #006847;
+    }
     #finland-dot {
       width: 15px;
       height: 15px;
@@ -613,6 +707,12 @@
       height: 15px;
       background-color: #169b62;
       border: 3px solid #ff883e;
+    }
+    #uk-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #012169;
+      border: 3px solid #c8102e;
     }
     #egypt-dot {
       width: 15px;
@@ -631,6 +731,12 @@
       height: 15px;
       background-color: #ffde00;
       border: 3px solid #ff0000;
+    }
+    #japan-dot {
+      width: 15px;
+      height: 15px;
+      background-color: #bc002d;
+      border: 3px solid #ffffff;
     }
     #skorea-dot {
       width: 15px;
@@ -666,14 +772,16 @@
     .info-menu {
       display: none;
       flex-direction: column;
-      width: 100%; /* Occupy the full width of the page */
+      width: 100%;
       position: absolute;
       top: 10px;
       left: 10px;
-      box-sizing: border-box; /* Include padding and border in width calculations */
-      background-color: white; /* Background for clarity */
-      border: 1px solid black; /* Optional border for visibility */
-      padding: 10px; /* Optional padding for spacing */
+      box-sizing: border-box;
+      background: #f6f7f9;
+      border: 1px solid #d3d3d3;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      padding: 18px 20px 16px 20px;
     }
 
     .menu-wrapper {
