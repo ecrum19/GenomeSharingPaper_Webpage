@@ -1,815 +1,1842 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Genomic Initiatives</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <script
-      type="text/javascript"
-      src="https://www.gstatic.com/charts/loader.js"
-    ></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
-    <script type="text/javascript">
+
+    <style>
+      :root {
+        --bg-1: #e9eff6;
+        --bg-2: #f4f8fb;
+        --ink: #14253a;
+        --muted: #54657a;
+        --card: #ffffff;
+        --border: #d3dce8;
+        --shadow: 0 10px 28px rgba(15, 33, 56, 0.09);
+        --accent: #1d5e86;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 1.4rem clamp(1rem, 2.6vw, 2.25rem) 2rem;
+        font-family: "Source Sans 3", sans-serif;
+        color: var(--ink);
+        background: radial-gradient(
+            1200px 480px at 8% -5%,
+            #d9e8f5 0%,
+            transparent 68%
+          ),
+          linear-gradient(160deg, var(--bg-1), var(--bg-2));
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Space Grotesk", sans-serif;
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .page-header {
+        margin-bottom: 1rem;
+      }
+
+      .page-header h1 {
+        font-size: clamp(1.5rem, 2.2vw, 2rem);
+        color: #10253f;
+      }
+
+      .page-header p {
+        margin-top: 0.2rem;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .data-updated {
+        margin-top: 0.3rem;
+        color: #54657a;
+        font-size: 0.78rem;
+        font-weight: 400;
+      }
+
+      .dashboard {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(0, 2.25fr) minmax(320px, 1fr);
+        align-items: start;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+      }
+
+      .map-card {
+        padding: 0.85rem;
+      }
+
+      .toolbar {
+        display: flex;
+        gap: 0.7rem 1rem;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 0.7rem;
+      }
+
+      .toolbar-left,
+      .toolbar-right {
+        display: flex;
+        gap: 0.55rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .toolbar label {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      select {
+        appearance: none;
+        border: 1px solid #bfcbda;
+        border-radius: 10px;
+        padding: 0.42rem 0.65rem;
+        background: #fff;
+        color: #16324f;
+        font-size: 0.96rem;
+      }
+
+      .btn {
+        border: 1px solid #94a9c4;
+        background: linear-gradient(145deg, #256e97, #1f5f87);
+        color: #fff;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.92rem;
+        padding: 0.42rem 0.78rem;
+        cursor: pointer;
+      }
+
+      .btn:disabled {
+        background: #d2dbe7;
+        border-color: #c4cfdd;
+        color: #6e7f94;
+        cursor: not-allowed;
+      }
+
+      .btn-muted {
+        background: #eef3f8;
+        border-color: #bfccdc;
+        color: #284563;
+      }
+
+      .view-label {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      #map-wrapper {
+        position: relative;
+        height: clamp(460px, 72vh, 960px);
+        min-height: 460px;
+        max-height: 960px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        resize: vertical;
+        background: linear-gradient(180deg, #f9fbff, #eef3f9);
+      }
+
+      #regions_div,
+      #map-marker-overlay {
+        position: absolute;
+        inset: 0;
+      }
+
+      #map-marker-overlay {
+        pointer-events: none;
+      }
+
+      .map-dot {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-radius: 999px;
+        border: 2px solid var(--stroke-color, #fff);
+        background-color: var(--fill-color, #2b6cb0);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+        transform: translate(-50%, -50%);
+        pointer-events: auto;
+        cursor: pointer;
+        transition: transform 0.12s ease;
+        display: none;
+      }
+
+      .map-dot:hover,
+      .map-dot.is-active {
+        transform: translate(-50%, -50%) scale(1.2);
+      }
+
+      .status-legend {
+        margin-top: 0.72rem;
+        background: #f4f8fc;
+        border: 1px solid #d8e1ec;
+        border-radius: 11px;
+        padding: 0.7rem 0.85rem;
+        display: flex;
+        gap: 0.7rem 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .status-legend h3 {
+        font-size: 0.95rem;
+        color: #1a334d;
+      }
+
+      .status-legend ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 0.4rem 0.95rem;
+        flex-wrap: wrap;
+      }
+
+      .status-legend li {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.9rem;
+        color: #1e364f;
+      }
+
+      .status-swatch {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 4px;
+        border: 1px solid #b8c5d5;
+      }
+
+      .status-active {
+        background: #d6e085;
+      }
+
+      .status-finished {
+        background: #c2ebff;
+      }
+
+      .status-limited {
+        background: #f5b8a3;
+      }
+
+      .status-h3 {
+        background: #cc85ad;
+      }
+
+      .status-none {
+        background: #afafaf;
+      }
+
+      .info-menu {
+        min-height: 540px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .info-menu .empty-state {
+        margin-top: 0.5rem;
+        color: var(--muted);
+      }
+
+      .panel-tabs {
+        display: flex;
+        gap: 0.45rem;
+      }
+
+      .panel-tab {
+        border: 1px solid #b6c5d7;
+        border-radius: 999px;
+        background: #f2f6fb;
+        color: #274260;
+        font-size: 0.86rem;
+        font-weight: 700;
+        padding: 0.28rem 0.72rem;
+        cursor: pointer;
+      }
+
+      .panel-tab.is-active {
+        background: #dcecff;
+        border-color: #86aacd;
+        color: #123c63;
+      }
+
+      .panel-view {
+        display: none;
+        margin-top: 0.82rem;
+      }
+
+      .panel-view.is-active {
+        display: block;
+      }
+
+      .country-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+
+      .country-header h2 {
+        font-size: 1.4rem;
+      }
+
+      .project-label {
+        margin-top: 0.25rem;
+        font-size: 0.98rem;
+        color: #3c5671;
+      }
+
+      .status-pill {
+        border-radius: 999px;
+        padding: 0.22rem 0.62rem;
+        border: 1px solid transparent;
+        font-weight: 700;
+        font-size: 0.82rem;
+      }
+
+      .status-pill-active {
+        color: #355018;
+        border-color: #95b95b;
+        background: #eaf3bc;
+      }
+
+      .status-pill-finished {
+        color: #174868;
+        border-color: #8dcde8;
+        background: #dcf3ff;
+      }
+
+      .status-pill-limited {
+        color: #75422f;
+        border-color: #e1a891;
+        background: #ffe1d4;
+      }
+
+      .status-pill-h3 {
+        color: #6f2f53;
+        border-color: #cf8eb2;
+        background: #f2d8e8;
+      }
+
+      .status-pill-none {
+        color: #4f5965;
+        border-color: #b0b8c2;
+        background: #eaedf0;
+      }
+
+      .quick-grid {
+        margin-top: 0.85rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+
+      .quick-item {
+        border: 1px solid #d6e0ec;
+        background: #f8fbff;
+        border-radius: 10px;
+        padding: 0.55rem 0.6rem;
+      }
+
+      .quick-label {
+        display: block;
+        color: #4c6279;
+        font-size: 0.84rem;
+      }
+
+      .quick-value {
+        display: block;
+        margin-top: 0.08rem;
+        font-size: 1rem;
+        color: #18344f;
+      }
+
+      .inline-links {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+      }
+
+      .compact-link {
+        font-size: 0.76rem;
+        padding: 0.12rem 0.4rem;
+      }
+
+      .info-menu h3 {
+        margin-top: 0.9rem;
+        font-size: 0.96rem;
+        color: #23405d;
+      }
+
+      .signal-list {
+        list-style: none;
+        margin: 0.45rem 0 0;
+        padding: 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .signal-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #29445f;
+        font-size: 0.93rem;
+      }
+
+      .signal-badge {
+        min-width: 38px;
+        text-align: center;
+        padding: 0.1rem 0.3rem;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .signal-yes {
+        color: #1f5e2f;
+        background: #dff4e5;
+        border: 1px solid #9fc7ab;
+      }
+
+      .signal-no {
+        color: #7e3030;
+        background: #fce7e7;
+        border: 1px solid #e2b0b0;
+      }
+
+      .signal-na {
+        color: #4f5f71;
+        background: #edf1f6;
+        border: 1px solid #cad4e0;
+      }
+
+      .source-links {
+        margin-top: 0.45rem;
+        display: flex;
+        gap: 0.45rem;
+        flex-wrap: wrap;
+      }
+
+      .source-link {
+        text-decoration: none;
+        color: #1b4d79;
+        border: 1px solid #b4c8dd;
+        background: #f2f8ff;
+        border-radius: 7px;
+        padding: 0.22rem 0.45rem;
+        font-size: 0.82rem;
+      }
+
+      .source-link:hover {
+        background: #e6f1ff;
+      }
+
+      .no-links {
+        font-size: 0.9rem;
+        color: #5b6e83;
+      }
+
+      .panel-zoom-btn {
+        margin-top: 0.9rem;
+        width: 100%;
+      }
+
+      .resource-intro {
+        color: #3e5873;
+        margin-top: 0.4rem;
+        font-size: 0.9rem;
+      }
+
+      .resource-links {
+        margin-top: 0.6rem;
+      }
+
+      .resource-context {
+        margin-top: 0.5rem;
+        color: #2d4661;
+        font-size: 0.88rem;
+        font-weight: 600;
+      }
+
+      .resource-list {
+        margin-top: 0.55rem;
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .resource-card {
+        border: 1px solid #d5e0ec;
+        border-radius: 10px;
+        background: #f8fbff;
+        padding: 0.55rem 0.6rem;
+      }
+
+      .resource-card h4 {
+        font-size: 0.92rem;
+        color: #1e3f60;
+        margin-bottom: 0.25rem;
+      }
+
+      .resource-card p {
+        color: #3d5874;
+        font-size: 0.86rem;
+        margin-bottom: 0.22rem;
+      }
+
+      .resource-meta {
+        font-size: 0.78rem;
+        color: #4e647b;
+        font-weight: 600;
+      }
+
+      .notable-section {
+        margin-top: 1rem;
+        padding: 1rem;
+      }
+
+      .notable-header p {
+        margin-top: 0.25rem;
+        color: var(--muted);
+      }
+
+      .notable-grid {
+        margin-top: 0.8rem;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+
+      .notable-group {
+        border: 1px solid #d7e0eb;
+        background: #fafcff;
+        border-radius: 11px;
+        padding: 0.6rem;
+      }
+
+      .notable-group h3 {
+        font-size: 0.92rem;
+        color: #284360;
+        margin-bottom: 0.4rem;
+      }
+
+      .notable-group ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.36rem;
+      }
+
+      .initiative-btn {
+        width: 100%;
+        border: 1px solid #d2ddea;
+        background: #fff;
+        color: #17324d;
+        border-radius: 9px;
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.32rem 0.45rem;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .initiative-btn:hover {
+        background: #f1f7ff;
+      }
+
+      .initiative-btn.is-active {
+        border-color: #85a8cc;
+        background: #e8f2ff;
+      }
+
+      .flag-dot {
+        width: 0.92rem;
+        height: 0.92rem;
+        border-radius: 999px;
+        border: 2px solid var(--stroke-color, #fff);
+        background: var(--fill-color, #256aa2);
+        flex: 0 0 auto;
+      }
+
+      .initiative-country {
+        font-size: 0.9rem;
+        flex: 1 1 auto;
+      }
+
+      .initiative-size {
+        font-size: 0.83rem;
+        color: #34516c;
+        white-space: nowrap;
+      }
+
+      .initiative-size i {
+        margin-right: 0.25rem;
+      }
+
+      .flag-us {
+        --fill-color: #3c3b6e;
+        --stroke-color: #b22234;
+      }
+      .flag-ca {
+        --fill-color: #ff0000;
+        --stroke-color: #2d2d2d;
+      }
+      .flag-mx {
+        --fill-color: #ffffff;
+        --stroke-color: #006847;
+      }
+      .flag-br {
+        --fill-color: #ffdf00;
+        --stroke-color: #009c3b;
+      }
+      .flag-uy {
+        --fill-color: #3e6bb7;
+        --stroke-color: #fcd116;
+      }
+      .flag-fi {
+        --fill-color: #ffffff;
+        --stroke-color: #003580;
+      }
+      .flag-ie {
+        --fill-color: #169b62;
+        --stroke-color: #ff883e;
+      }
+      .flag-gb {
+        --fill-color: #012169;
+        --stroke-color: #c8102e;
+      }
+      .flag-eg {
+        --fill-color: #000000;
+        --stroke-color: #ce1126;
+      }
+      .flag-sa {
+        --fill-color: #ffffff;
+        --stroke-color: #008753;
+      }
+      .flag-cn {
+        --fill-color: #ffde00;
+        --stroke-color: #ff0000;
+      }
+      .flag-kr {
+        --fill-color: #ffffff;
+        --stroke-color: #bc002d;
+      }
+      .flag-jp {
+        --fill-color: #bc002d;
+        --stroke-color: #ffffff;
+      }
+      .flag-au {
+        --fill-color: #ff0000;
+        --stroke-color: #00247d;
+      }
+      .flag-nz {
+        --fill-color: #00247d;
+        --stroke-color: #cc142b;
+      }
+
+      @media (max-width: 1180px) {
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+
+        .info-menu {
+          min-height: 0;
+        }
+
+        .notable-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 740px) {
+        .quick-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .notable-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .status-legend ul {
+          gap: 0.3rem 0.65rem;
+        }
+
+        .status-legend li {
+          font-size: 0.86rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="page-header">
+      <h1>Global National Genomic Initiatives</h1>
+      <p>
+        Click a country to explore project status, program details, and data
+        sharing signals.
+      </p>
+      <p id="data-updated-stamp" class="data-updated">
+        Last updated: loading...
+      </p>
+    </header>
+
+    <main class="dashboard">
+      <section class="card map-card">
+        <div class="toolbar">
+          <div class="toolbar-left">
+            <label for="region-select">Zoom region</label>
+            <select id="region-select">
+              <option value="world">World</option>
+              <option value="021">North America</option>
+              <option value="005">South America</option>
+              <option value="150">Europe</option>
+              <option value="002">Africa</option>
+              <option value="142">Asia</option>
+              <option value="009">Oceania</option>
+            </select>
+            <button id="reset-view-btn" type="button" class="btn btn-muted">
+              Reset
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <button id="zoom-country-btn" type="button" class="btn" disabled>
+              Zoom to selected country
+            </button>
+            <span id="current-view-label" class="view-label"
+              >Current view: World</span
+            >
+          </div>
+        </div>
+
+        <div id="map-wrapper">
+          <div id="regions_div"></div>
+          <div id="map-marker-overlay"></div>
+        </div>
+
+        <div class="status-legend" aria-label="Status legend">
+          <h3>National Project Status</h3>
+          <ul>
+            <li><span class="status-swatch status-active"></span>Active</li>
+            <li><span class="status-swatch status-finished"></span>Finished</li>
+            <li>
+              <span class="status-swatch status-limited"></span>Limited Scope
+            </li>
+            <li><span class="status-swatch status-h3"></span>H3 Africa</li>
+            <li><span class="status-swatch status-none"></span>None</li>
+          </ul>
+        </div>
+      </section>
+
+      <aside id="info-menu" class="card info-menu">
+        <div class="panel-tabs" role="tablist" aria-label="Information panels">
+          <button
+            id="details-tab-btn"
+            type="button"
+            class="panel-tab is-active"
+            role="tab"
+            aria-selected="true"
+          >
+            Country Details
+          </button>
+          <button
+            id="resources-tab-btn"
+            type="button"
+            class="panel-tab"
+            role="tab"
+            aria-selected="false"
+          >
+            Additional Resources
+          </button>
+        </div>
+
+        <section id="country-details-panel" class="panel-view is-active">
+          <h2>Country Details</h2>
+          <p class="empty-state">
+            Select a country on the map or from “Notable Initiatives”.
+          </p>
+        </section>
+
+        <section id="resources-panel" class="panel-view" aria-live="polite"></section>
+      </aside>
+    </main>
+
+    <section class="card notable-section">
+      <div class="notable-header">
+        <h2>Notable Initiatives</h2>
+        <p>
+          Marker dots on the map are anchored dynamically to rendered country
+          regions and update on resize/zoom.
+        </p>
+      </div>
+      <div id="notable-grid" class="notable-grid"></div>
+    </section>
+
+    <script>
       google.charts.load("current", {
         packages: ["geochart"],
         mapsApiKey: "AIzaSyBArc0dMHQw1ZwpQwMso8IPaT3N6LJVkI4",
       });
-      google.charts.setOnLoadCallback(loadCSVData);
-      function loadCSVData() {
-        fetch("./SupplementalFile4.csv")
-          .then((response) => response.text())
-          .then((csvText) => {
-            Papa.parse(csvText, {
-              header: true,
-              complete: function (results) {
-                const extraData = additionaDataDisplay(
-                  results.data,
-                  results.meta.fields
-                );
-                drawRegionsMap(results.data, results.meta.fields, extraData);
-              },
-            });
+
+      const COUNTRY_FIELD = "Country";
+      const ISO_FIELD = "ISO 3166-1 alpha-2 Code";
+      const PROJECT_FIELD = "Project Name";
+      const WEBSITE_FIELD = "Website / Publication";
+      const STATUS_TEXT_FIELD = "national genomic project status";
+      const STATUS_NUM_FIELD = "project status (number)";
+      const PLANNED_ANALYSES_FIELD = "planned WES and/or genome analyses";
+      const FUNDING_FIELD = "Funding type";
+      const BIOBANK_LINK_FIELD = "Biobank Link";
+      const MEDICAL_LINK_FIELD = "Linkage with Medical Data";
+
+      const CAPABILITY_FIELDS = [
+        {
+          key: "personalized and precision medicine statement",
+          label: "Precision medicine statement",
+        },
+        { key: "Infrastructure", label: "National infrastructure" },
+        {
+          key: "Data Sharing Goals & Methods",
+          label: "Data sharing goals and methods",
+        },
+        { key: "Data Management", label: "Data management plan" },
+        { key: "Linkages", label: "Cross-system linkages" },
+        {
+          key: "Establishment or Linkage with Existing Biobank(s)",
+          label: "Biobank establishment/linkage",
+        },
+      ];
+
+      const REGION_LABELS = {
+        world: "World",
+        "021": "North America",
+        "005": "South America",
+        "150": "Europe",
+        "002": "Africa",
+        "142": "Asia",
+        "009": "Oceania",
+      };
+
+      const EPPERMED_RESOURCE_PAGE_URL =
+        "https://www.eppermed.eu/publications-resources/resources-for-researchers/research-infrastructures-involved-in-personalised-medicine/";
+      const EPPERMED_RESOURCE_XLSX_URL =
+        "https://www.eppermed.eu/wp-content/uploads/D5.8-and-D5.9-list-of-projects-and-infrastructures.xlsx";
+      const GENOME_OF_EUROPE_URL = "https://genomeofeurope.eu/";
+      const GITHUB_LAST_UPDATE_API_URL =
+        "https://api.github.com/repos/ecrum19/GenomeSharingPaper_Webpage/commits?path=SupplementalFile4.csv&sha=main&per_page=1";
+
+      const EPPERMED_INFRASTRUCTURE_SNAPSHOT = [
+        {
+          name: "European Brain Research Infrastructures (EBRAINS)",
+          scope: "Multiple countries (pan-European)",
+          countries: [],
+          focus:
+            "Digital ecosystem for neuroscience data, tools, and models supporting brain-health innovation.",
+        },
+        {
+          name: "Africa-Europe CoRE Genomics for Health in Africa",
+          scope: "Rwanda, Ghana, Kenya and other partners",
+          countries: ["RW", "GH", "KE"],
+          focus:
+            "Genomics-focused collaboration for biobanking, training, and patient engagement.",
+        },
+        {
+          name: "Integrated Biorepository of H3Africa Uganda (IBRH3AU)",
+          scope: "African continent (hub in Uganda)",
+          countries: ["UG"],
+          focus:
+            "Biorepository infrastructure for biospecimen collection, quality control, and sharing.",
+        },
+        {
+          name: "Austrian Biobanking Network BBMRI.at",
+          scope: "Austria",
+          countries: ["AT"],
+          focus:
+            "National node connecting Austrian universities and biobanks with BBMRI-ERIC.",
+        },
+        {
+          name: "Biobank Graz",
+          scope: "Austria (Graz)",
+          countries: ["AT"],
+          focus:
+            "Large clinical biobank with broad specimen and associated data access for research.",
+        },
+        {
+          name: "Belgian Genome Biobank (BGB)",
+          scope: "Belgium",
+          countries: ["BE"],
+          focus:
+            "Secure genomic resource to support national genetic and health studies.",
+        },
+        {
+          name: "Central Biobank of Ghent University Hospital",
+          scope: "Belgium (Ghent)",
+          countries: ["BE"],
+          focus:
+            "Biobank supporting translational research with large human and animal sample collections.",
+        },
+        {
+          name: "Biobank University and University Hospitals Leuven",
+          scope: "Belgium (Leuven)",
+          countries: ["BE"],
+          focus:
+            "Storage and quality-focused biobank integrated with clinical sample flows.",
+        },
+        {
+          name: "Genomics Core Leuven",
+          scope: "Belgium (Leuven)",
+          countries: ["BE"],
+          focus:
+            "Sequencing and bioinformatics platform supporting research and diagnostics.",
+        },
+      ];
+
+      const NOTABLE_INITIATIVES = [
+        {
+          iso: "US",
+          country: "USA",
+          region: "North America",
+          analyses: "1 M",
+          colorClass: "flag-us",
+        },
+        {
+          iso: "CA",
+          country: "Canada",
+          region: "North America",
+          analyses: "130 K",
+          colorClass: "flag-ca",
+        },
+        {
+          iso: "MX",
+          country: "Mexico",
+          region: "North America",
+          analyses: "100 K",
+          colorClass: "flag-mx",
+        },
+        {
+          iso: "BR",
+          country: "Brazil",
+          region: "South America",
+          analyses: "15 K",
+          colorClass: "flag-br",
+        },
+        {
+          iso: "UY",
+          country: "Uruguay",
+          region: "South America",
+          analyses: "0.85 K",
+          colorClass: "flag-uy",
+        },
+        {
+          iso: "FI",
+          country: "Finland",
+          region: "Europe",
+          analyses: "500 K",
+          colorClass: "flag-fi",
+        },
+        {
+          iso: "IE",
+          country: "Ireland",
+          region: "Europe",
+          analyses: "400 K",
+          colorClass: "flag-ie",
+        },
+        {
+          iso: "GB",
+          country: "United Kingdom",
+          region: "Europe",
+          analyses: "100 K",
+          colorClass: "flag-gb",
+        },
+        {
+          iso: "EG",
+          country: "Egypt",
+          region: "Africa / Middle East",
+          analyses: "0.1 K",
+          colorClass: "flag-eg",
+        },
+        {
+          iso: "SA",
+          country: "Saudi Arabia",
+          region: "Africa / Middle East",
+          analyses: "100 K",
+          colorClass: "flag-sa",
+        },
+        {
+          iso: "CN",
+          country: "China",
+          region: "Asia",
+          analyses: "100 M",
+          colorClass: "flag-cn",
+        },
+        {
+          iso: "KR",
+          country: "South Korea",
+          region: "Asia",
+          analyses: "50 M",
+          colorClass: "flag-kr",
+        },
+        {
+          iso: "JP",
+          country: "Japan",
+          region: "Asia",
+          analyses: "250 K",
+          colorClass: "flag-jp",
+        },
+        {
+          iso: "AU",
+          country: "Australia",
+          region: "Oceania",
+          analyses: "25 K",
+          colorClass: "flag-au",
+        },
+        {
+          iso: "NZ",
+          country: "New Zealand",
+          region: "Oceania",
+          analyses: "0.6 K",
+          colorClass: "flag-nz",
+        },
+      ];
+
+      const appState = {
+        chart: null,
+        mapDataTable: null,
+        rowsByIso: new Map(),
+        rowIndexByIso: new Map(),
+        currentRegion: "world",
+        selectedIso: null,
+        pendingSelectionIso: null,
+        resizeTimer: null,
+        activeInfoTab: "details",
+        mapResizeObserver: null,
+      };
+
+      google.charts.setOnLoadCallback(initializeApp);
+
+      function initializeApp() {
+        bindToolbarActions();
+        bindInfoPanelTabs();
+        renderNotableInitiatives();
+        renderResourcesPanel();
+        updateDataUpdatedStampFromGitHub();
+        loadCSVData();
+        observeMapResize();
+        window.addEventListener("resize", handleResize);
+      }
+
+      function bindToolbarActions() {
+        const regionSelect = document.getElementById("region-select");
+        const resetViewButton = document.getElementById("reset-view-btn");
+        const zoomCountryButton = document.getElementById("zoom-country-btn");
+
+        regionSelect.addEventListener("change", (event) => {
+          appState.currentRegion = event.target.value;
+          appState.pendingSelectionIso = appState.selectedIso;
+          drawMap();
+        });
+
+        resetViewButton.addEventListener("click", () => {
+          appState.currentRegion = "world";
+          regionSelect.value = "world";
+          appState.pendingSelectionIso = appState.selectedIso;
+          drawMap();
+        });
+
+        zoomCountryButton.addEventListener("click", () => {
+          if (appState.selectedIso) {
+            zoomToCountry(appState.selectedIso);
+          }
+        });
+      }
+
+      function bindInfoPanelTabs() {
+        const detailsTabButton = document.getElementById("details-tab-btn");
+        const resourcesTabButton = document.getElementById("resources-tab-btn");
+        detailsTabButton.addEventListener("click", () => switchInfoTab("details"));
+        resourcesTabButton.addEventListener("click", () =>
+          switchInfoTab("resources")
+        );
+      }
+
+      function switchInfoTab(tabName) {
+        appState.activeInfoTab = tabName;
+        const isDetails = tabName === "details";
+        const detailsTabButton = document.getElementById("details-tab-btn");
+        const resourcesTabButton = document.getElementById("resources-tab-btn");
+        const detailsPanel = document.getElementById("country-details-panel");
+        const resourcesPanel = document.getElementById("resources-panel");
+
+        detailsTabButton.classList.toggle("is-active", isDetails);
+        resourcesTabButton.classList.toggle("is-active", !isDetails);
+        detailsTabButton.setAttribute("aria-selected", String(isDetails));
+        resourcesTabButton.setAttribute("aria-selected", String(!isDetails));
+        detailsPanel.classList.toggle("is-active", isDetails);
+        resourcesPanel.classList.toggle("is-active", !isDetails);
+      }
+
+      async function loadCSVData() {
+        try {
+          const response = await fetch("./SupplementalFile4.csv");
+          if (!response.ok) {
+            throw new Error("Failed to load CSV data.");
+          }
+          const csvText = await response.text();
+
+          Papa.parse(csvText, {
+            header: true,
+            skipEmptyLines: true,
+            complete: ({ data, meta }) => {
+              const rows = data
+                .filter((row) => row[ISO_FIELD] && row[STATUS_NUM_FIELD])
+                .map((row) => normalizeRow(row, meta.fields));
+
+              prepareMapData(rows);
+              drawMap();
+            },
+            error: (error) => {
+              renderDataError(error.message);
+            },
           });
+        } catch (error) {
+          renderDataError(error.message);
+        }
       }
 
-      // Obtains DataTable for the display menu
-      function additionaDataDisplay(data, fields) {
-        var extraDataTable = new google.visualization.DataTable();
-        const notStringFields = ["project status (number)"];
-
+      function normalizeRow(row, fields) {
+        const normalized = {};
         fields.forEach((field) => {
-          if (notStringFields.includes(field)) {
-            extraDataTable.addColumn("number", field);
-          } else {
-            extraDataTable.addColumn("string", field);
-          }
+          normalized[field] = String(row[field] || "").trim();
         });
-
-        data.forEach((row) => {
-          extraDataTable.addRow([
-            row[fields[0]],
-            row[fields[1]],
-            row[fields[2]],
-            row[fields[3]],
-            row[fields[4]],
-            parseFloat(row[fields[5]]),
-            row[fields[6]],
-            row[fields[7]],
-            row[fields[8]],
-            row[fields[9]],
-            row[fields[10]],
-            row[fields[11]],
-            row[fields[12]],
-            row[fields[13]],
-            row[fields[14]],
-            row[fields[15]],
-          ]);
-        });
-
-        return extraDataTable;
+        const statusNum = Number.parseFloat(normalized[STATUS_NUM_FIELD]);
+        normalized[STATUS_NUM_FIELD] = Number.isFinite(statusNum) ? statusNum : 0;
+        return normalized;
       }
 
-      // Draws the map from just the "ISO" and "project status" columns
-      function drawRegionsMap(data, fields, extra) {
-        var mapDataArray = [fields.slice(0, 2)];
-        var mapDataTable = new google.visualization.DataTable();
+      function prepareMapData(rows) {
+        const mapTable = new google.visualization.DataTable();
+        mapTable.addColumn("string", ISO_FIELD);
+        mapTable.addColumn("number", STATUS_NUM_FIELD);
 
-        mapDataTable.addColumn("string", mapDataArray[0][0]);
-        mapDataTable.addColumn("number", mapDataArray[0][1]);
-        data.forEach((row) => {
-          mapDataTable.addRow([row[fields[1]], parseFloat(row[fields[5]])]);
+        appState.rowsByIso = new Map();
+        appState.rowIndexByIso = new Map();
+
+        rows.forEach((row, index) => {
+          const iso = row[ISO_FIELD];
+          mapTable.addRow([iso, row[STATUS_NUM_FIELD]]);
+          appState.rowsByIso.set(iso, row);
+          appState.rowIndexByIso.set(iso, index);
         });
 
-        /**
-         * @param selectedItem ...
-         *
-         * @returns an array of data about the country of interest
-         */
-        function getCountryInfo(selectedItem) {
-          var country_info = [];
-          for (var i = 0; i < 16; i++) {
-            country_info.push(extra.getValue(selectedItem, i));
-          }
-          return country_info;
+        appState.mapDataTable = mapTable;
+      }
+
+      function drawMap() {
+        if (!appState.mapDataTable) {
+          return;
         }
 
-        var options = {
+        if (!appState.chart) {
+          appState.chart = new google.visualization.GeoChart(
+            document.getElementById("regions_div")
+          );
+          google.visualization.events.addListener(
+            appState.chart,
+            "select",
+            onMapSelection
+          );
+          google.visualization.events.addListener(
+            appState.chart,
+            "ready",
+            onMapReady
+          );
+        }
+
+        appState.chart.draw(
+          appState.mapDataTable,
+          getMapOptions(appState.currentRegion)
+        );
+        updateCurrentViewLabel();
+      }
+
+      function getMapOptions(region) {
+        return {
+          region,
+          resolution: "countries",
+          displayMode: "regions",
+          keepAspectRatio: true,
+          legend: "none",
+          datalessRegionColor: "#e8edf4",
+          defaultColor: "#cfd8e2",
+          backgroundColor: "transparent",
           colorAxis: {
             colors: ["#afafaf", "#cc85ad", "#f5b8a3", "#c2ebff", "#d6e085"],
-          }, // order: [no, limited scope, H3 Africa, finished, active]
-          legend: "none",
+          },
+          magnifyingGlass: {
+            enable: true,
+            zoomFactor: 5,
+          },
+          tooltip: {
+            textStyle: {
+              color: "#17314b",
+              fontName: "Source Sans 3",
+              fontSize: 13,
+            },
+          },
         };
+      }
 
-        var chart = new google.visualization.GeoChart(
-          document.getElementById("regions_div")
+      function onMapSelection() {
+        const selection = appState.chart.getSelection();
+        if (!selection.length || selection[0].row == null) {
+          return;
+        }
+
+        const rowIndex = selection[0].row;
+        const iso = appState.mapDataTable.getValue(rowIndex, 0);
+        setSelectedCountry(iso, { setChartSelection: false });
+      }
+
+      function onMapReady() {
+        if (appState.pendingSelectionIso) {
+          applyChartSelection(appState.pendingSelectionIso);
+          appState.pendingSelectionIso = null;
+        }
+        window.requestAnimationFrame(updateNotableMarkerPositions);
+      }
+
+      function setSelectedCountry(
+        iso,
+        { setChartSelection = true, ensureVisible = false } = {}
+      ) {
+        const row = appState.rowsByIso.get(iso);
+        if (!row) {
+          return;
+        }
+
+        appState.selectedIso = iso;
+        renderCountryInfo(row);
+        renderResourcesPanel();
+        switchInfoTab("details");
+        highlightSelectedInitiative(iso);
+        updateZoomButtonState();
+
+        if (
+          ensureVisible &&
+          appState.currentRegion !== "world" &&
+          appState.currentRegion !== iso
+        ) {
+          appState.currentRegion = "world";
+          appState.pendingSelectionIso = iso;
+          drawMap();
+          return;
+        }
+
+        if (setChartSelection) {
+          applyChartSelection(iso);
+        }
+      }
+
+      function applyChartSelection(iso) {
+        const rowIndex = appState.rowIndexByIso.get(iso);
+        if (
+          rowIndex == null ||
+          !appState.chart ||
+          typeof appState.chart.setSelection !== "function"
+        ) {
+          appState.pendingSelectionIso = iso;
+          return;
+        }
+
+        appState.chart.setSelection([{ row: rowIndex }]);
+      }
+
+      function renderCountryInfo(row) {
+        const detailsPanel = document.getElementById("country-details-panel");
+
+        const country = cleanValue(row[COUNTRY_FIELD]);
+        const project = cleanValue(row[PROJECT_FIELD]);
+        const status = formatStatus(row[STATUS_TEXT_FIELD]);
+        const statusClass = getStatusClass(status);
+        const links = extractLinks(row[WEBSITE_FIELD]);
+
+        detailsPanel.innerHTML = `
+          <h2>Country Details</h2>
+          <div class="country-header">
+            <div>
+              <h2>${escapeHtml(country)}</h2>
+              <p class="project-label">${escapeHtml(project)}</p>
+            </div>
+            <span class="status-pill ${statusClass}">${escapeHtml(status)}</span>
+          </div>
+
+          <div class="quick-grid">
+            <div class="quick-item">
+              <span class="quick-label">Planned WES / Genome Analyses</span>
+              <span class="quick-value">${escapeHtml(
+                formatGenomeCount(row[PLANNED_ANALYSES_FIELD])
+              )}</span>
+            </div>
+            <div class="quick-item">
+              <span class="quick-label">Funding Type</span>
+              <span class="quick-value">${formatInlineValueWithLinks(
+                row[FUNDING_FIELD],
+                "Funding"
+              )}</span>
+            </div>
+            <div class="quick-item">
+              <span class="quick-label">Biobank Link</span>
+              <span class="quick-value">${formatInlineValueWithLinks(
+                row[BIOBANK_LINK_FIELD],
+                "Biobank Link"
+              )}</span>
+            </div>
+            <div class="quick-item">
+              <span class="quick-label">Linkage With Medical Data</span>
+              <span class="quick-value">${formatInlineValueWithLinks(
+                formatFlagText(row[MEDICAL_LINK_FIELD]),
+                "Medical Data"
+              )}</span>
+            </div>
+          </div>
+
+          <h3>Program Signals</h3>
+          <ul class="signal-list">
+            ${CAPABILITY_FIELDS.map((field) =>
+              buildSignalListItem(field.label, row[field.key])
+            ).join("")}
+          </ul>
+
+          <h3>Sources</h3>
+          <div class="source-links">
+            ${
+              links.length
+                ? links
+                    .map(
+                      (link, index) =>
+                        `<a class="source-link" href="${escapeHtml(
+                          link
+                        )}" target="_blank" rel="noopener noreferrer">Source ${
+                          index + 1
+                        }</a>`
+                    )
+                    .join("")
+                : '<span class="no-links">No source links listed.</span>'
+            }
+          </div>
+
+          <button id="panel-zoom-btn" type="button" class="btn panel-zoom-btn">Zoom to this country</button>
+        `;
+
+        const panelZoomBtn = document.getElementById("panel-zoom-btn");
+        if (panelZoomBtn) {
+          panelZoomBtn.addEventListener("click", () => {
+            zoomToCountry(row[ISO_FIELD]);
+          });
+        }
+      }
+
+      function renderResourcesPanel() {
+        const resourcesPanel = document.getElementById("resources-panel");
+        const selectedRow = appState.selectedIso
+          ? appState.rowsByIso.get(appState.selectedIso)
+          : null;
+        const selectedCountry = selectedRow?.[COUNTRY_FIELD] || null;
+        const relatedResources = getRelatedResources(appState.selectedIso);
+
+        resourcesPanel.innerHTML = `
+          <h2>Additional Resources</h2>
+          <p class="resource-intro">
+            Integrated from EP PerMed's “Research Infrastructures involved in Personalised Medicine” mapping list.
+          </p>
+          <div class="source-links resource-links">
+            <a class="source-link" href="${escapeHtml(
+              EPPERMED_RESOURCE_PAGE_URL
+            )}" target="_blank" rel="noopener noreferrer">Open EP PerMed page</a>
+            <a class="source-link" href="${escapeHtml(
+              EPPERMED_RESOURCE_XLSX_URL
+            )}" target="_blank" rel="noopener noreferrer">Download infrastructure list (XLSX)</a>
+            <a class="source-link" href="${escapeHtml(
+              GENOME_OF_EUROPE_URL
+            )}" target="_blank" rel="noopener noreferrer">Genome of Europe</a>
+          </div>
+          <p class="resource-context">${
+            selectedCountry
+              ? `Resources shown for selected country: ${escapeHtml(
+                  selectedCountry
+                )} (${relatedResources.length})`
+              : "Select a country to filter these resources by relevance."
+          }</p>
+          <div class="resource-list">
+            ${
+              relatedResources.length
+                ? relatedResources
+                    .map(
+                      (resource) => `
+                      <article class="resource-card">
+                        <h4>${escapeHtml(resource.name)}</h4>
+                        <p>${escapeHtml(resource.focus)}</p>
+                        <span class="resource-meta">Coverage: ${escapeHtml(
+                          resource.scope
+                        )}</span>
+                      </article>
+                    `
+                    )
+                    .join("")
+                : `<article class="resource-card"><p>No country-specific entry from the integrated snapshot yet. Open the EP PerMed source list for the full set.</p></article>`
+            }
+          </div>
+        `;
+      }
+
+      function getRelatedResources(selectedIso) {
+        if (!selectedIso) {
+          return EPPERMED_INFRASTRUCTURE_SNAPSHOT.slice(0, 6);
+        }
+
+        const iso = selectedIso.toUpperCase();
+        const directMatches = EPPERMED_INFRASTRUCTURE_SNAPSHOT.filter((entry) =>
+          entry.countries.includes(iso)
         );
-        chart.draw(mapDataTable, options);
 
-        // event listener for 'select' event
-        google.visualization.events.addListener(chart, "select", function () {
-          var selection = chart.getSelection();
-          if (selection.length > 0) {
-            var selectedItem = selection[0];
-            var countryIso = mapDataTable.getValue(selectedItem.row, 0);
-            var active = mapDataTable.getValue(selectedItem.row, 1);
-            showMenu(getCountryInfo(selectedItem.row), fields);
+        if (directMatches.length) {
+          return directMatches;
+        }
+
+        return EPPERMED_INFRASTRUCTURE_SNAPSHOT.filter(
+          (entry) => entry.countries.length === 0
+        );
+      }
+
+      function zoomToCountry(iso) {
+        appState.currentRegion = iso;
+        appState.pendingSelectionIso = iso;
+        drawMap();
+      }
+
+      function buildSignalListItem(label, value) {
+        const normalized = normalizeFlag(value);
+        if (normalized === true) {
+          return `<li><span class="signal-badge signal-yes">Yes</span><span>${escapeHtml(
+            label
+          )}</span></li>`;
+        }
+        if (normalized === false) {
+          return `<li><span class="signal-badge signal-no">No</span><span>${escapeHtml(
+            label
+          )}</span></li>`;
+        }
+        return `<li><span class="signal-badge signal-na">N/A</span><span>${escapeHtml(
+          label
+        )}</span></li>`;
+      }
+
+      function renderNotableInitiatives() {
+        const notableGrid = document.getElementById("notable-grid");
+        notableGrid.innerHTML = "";
+
+        const grouped = groupByRegion(NOTABLE_INITIATIVES);
+        grouped.forEach((initiatives, region) => {
+          const group = document.createElement("article");
+          group.className = "notable-group";
+
+          const title = document.createElement("h3");
+          title.textContent = region;
+          group.appendChild(title);
+
+          const list = document.createElement("ul");
+          initiatives.forEach((initiative) => {
+            const item = document.createElement("li");
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "initiative-btn";
+            button.dataset.iso = initiative.iso;
+            button.innerHTML = `
+              <span class="flag-dot ${initiative.colorClass}"></span>
+              <span class="initiative-country">${escapeHtml(
+                initiative.country
+              )}</span>
+              <span class="initiative-size"><i class="fas fa-dna"></i>${escapeHtml(
+                initiative.analyses
+              )}</span>
+            `;
+            button.addEventListener("click", () => {
+              setSelectedCountry(initiative.iso, {
+                setChartSelection: true,
+                ensureVisible: true,
+              });
+            });
+            item.appendChild(button);
+            list.appendChild(item);
+          });
+
+          group.appendChild(list);
+          notableGrid.appendChild(group);
+        });
+
+        createOverlayMarkers();
+      }
+
+      function groupByRegion(initiatives) {
+        const order = [
+          "North America",
+          "South America",
+          "Europe",
+          "Africa / Middle East",
+          "Asia",
+          "Oceania",
+        ];
+        const grouped = new Map(order.map((region) => [region, []]));
+
+        initiatives.forEach((initiative) => {
+          if (!grouped.has(initiative.region)) {
+            grouped.set(initiative.region, []);
+          }
+          grouped.get(initiative.region).push(initiative);
+        });
+
+        return grouped;
+      }
+
+      function createOverlayMarkers() {
+        const overlay = document.getElementById("map-marker-overlay");
+        overlay.innerHTML = "";
+
+        NOTABLE_INITIATIVES.forEach((initiative) => {
+          const marker = document.createElement("button");
+          marker.type = "button";
+          marker.className = `map-dot ${initiative.colorClass}`;
+          marker.dataset.iso = initiative.iso;
+          marker.title = `${initiative.country} (${initiative.analyses})`;
+          marker.addEventListener("click", () => {
+            setSelectedCountry(initiative.iso, {
+              setChartSelection: true,
+              ensureVisible: true,
+            });
+          });
+          overlay.appendChild(marker);
+        });
+      }
+
+      function updateNotableMarkerPositions() {
+        const mapWrapper = document.getElementById("map-wrapper");
+        const overlay = document.getElementById("map-marker-overlay");
+        const mapRect = mapWrapper.getBoundingClientRect();
+
+        NOTABLE_INITIATIVES.forEach((initiative) => {
+          const marker = overlay.querySelector(`[data-iso="${initiative.iso}"]`);
+          if (!marker) {
+            return;
+          }
+
+          const regionElement = findRegionElement(initiative.iso);
+          if (!regionElement) {
+            marker.style.display = "none";
+            return;
+          }
+
+          const regionRect = regionElement.getBoundingClientRect();
+          if (regionRect.width === 0 && regionRect.height === 0) {
+            marker.style.display = "none";
+            return;
+          }
+
+          marker.style.left = `${
+            regionRect.left - mapRect.left + regionRect.width / 2
+          }px`;
+          marker.style.top = `${
+            regionRect.top - mapRect.top + regionRect.height / 2
+          }px`;
+          marker.style.display = "block";
+        });
+
+        highlightSelectedInitiative(appState.selectedIso);
+      }
+
+      function findRegionElement(iso) {
+        const candidates = [
+          `google-visualization-geochart-regionid-${iso}`,
+          `google-visualization-geochart-regionid-${iso.toUpperCase()}`,
+          `google-visualization-geochart-regionid-${iso.toLowerCase()}`,
+        ];
+
+        for (const id of candidates) {
+          const element = document.getElementById(id);
+          if (element) {
+            return element;
+          }
+        }
+
+        return document.querySelector(
+          `#regions_div [id$="-${iso.toUpperCase()}"]`
+        );
+      }
+
+      function highlightSelectedInitiative(iso) {
+        document.querySelectorAll(".initiative-btn").forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.iso === iso);
+        });
+        document.querySelectorAll(".map-dot").forEach((marker) => {
+          marker.classList.toggle("is-active", marker.dataset.iso === iso);
+        });
+      }
+
+      function updateCurrentViewLabel() {
+        const regionSelect = document.getElementById("region-select");
+        const currentViewLabel = document.getElementById("current-view-label");
+        const defaultLabel = REGION_LABELS[appState.currentRegion];
+        const countryLabel = appState.rowsByIso.get(appState.currentRegion)?.[
+          COUNTRY_FIELD
+        ];
+
+        currentViewLabel.textContent = `Current view: ${
+          defaultLabel || countryLabel || "Custom"
+        }`;
+
+        if (REGION_LABELS[appState.currentRegion]) {
+          regionSelect.value = appState.currentRegion;
+        } else {
+          regionSelect.value = "world";
+        }
+      }
+
+      function updateZoomButtonState() {
+        const zoomCountryButton = document.getElementById("zoom-country-btn");
+        zoomCountryButton.disabled = !appState.selectedIso;
+      }
+
+      function observeMapResize() {
+        const mapWrapper = document.getElementById("map-wrapper");
+        if (!mapWrapper || typeof ResizeObserver === "undefined") {
+          return;
+        }
+
+        appState.mapResizeObserver = new ResizeObserver(() => {
+          queueMapRedraw();
+        });
+        appState.mapResizeObserver.observe(mapWrapper);
+      }
+
+      function queueMapRedraw() {
+        clearTimeout(appState.resizeTimer);
+        appState.resizeTimer = window.setTimeout(() => {
+          drawMap();
+        }, 180);
+      }
+
+      function handleResize() {
+        queueMapRedraw();
+      }
+
+      function renderDataError(message) {
+        const detailsPanel = document.getElementById("country-details-panel");
+        detailsPanel.innerHTML = `
+          <h2>Country Details</h2>
+          <p class="empty-state">Could not load data. ${escapeHtml(message)}</p>
+        `;
+      }
+
+      async function updateDataUpdatedStampFromGitHub() {
+        const stamp = document.getElementById("data-updated-stamp");
+        try {
+          const response = await fetch(GITHUB_LAST_UPDATE_API_URL, {
+            headers: {
+              Accept: "application/vnd.github+json",
+            },
+          });
+          if (!response.ok) {
+            throw new Error(`GitHub API request failed (${response.status})`);
+          }
+
+          const commits = await response.json();
+          const commitDate = commits?.[0]?.commit?.committer?.date;
+          if (!commitDate) {
+            throw new Error("No commit date found in GitHub API response.");
+          }
+
+          const parsedDate = new Date(commitDate);
+          if (Number.isNaN(parsedDate.valueOf())) {
+            throw new Error("Invalid commit date format from GitHub API.");
+          }
+
+          const formatted = new Intl.DateTimeFormat(undefined, {
+            dateStyle: "medium",
+            timeStyle: "short",
+          }).format(parsedDate);
+          stamp.textContent = `Last updated: ${formatted}`;
+        } catch {
+          stamp.textContent = "Last updated: unavailable";
+        }
+      }
+
+      function formatStatus(statusValue) {
+        const value = cleanValue(statusValue).toLowerCase();
+        if (value === "n/a") {
+          return "N/A";
+        }
+        return value
+          .split(" ")
+          .filter(Boolean)
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(" ");
+      }
+
+      function getStatusClass(status) {
+        const normalizedStatus = status.toLowerCase();
+        if (normalizedStatus.includes("active")) {
+          return "status-pill-active";
+        }
+        if (normalizedStatus.includes("finished")) {
+          return "status-pill-finished";
+        }
+        if (normalizedStatus.includes("limited")) {
+          return "status-pill-limited";
+        }
+        if (normalizedStatus.includes("h3")) {
+          return "status-pill-h3";
+        }
+        return "status-pill-none";
+      }
+
+      function formatGenomeCount(value) {
+        const cleaned = cleanValue(value);
+        const numeric = Number(cleaned.replace(/,/g, ""));
+        if (Number.isFinite(numeric)) {
+          return numeric.toLocaleString();
+        }
+        return cleaned;
+      }
+
+      function normalizeFlag(value) {
+        const normalized = cleanValue(value).toLowerCase();
+        if (
+          normalized === "1" ||
+          normalized === "yes" ||
+          normalized === "true" ||
+          normalized === "planned" ||
+          normalized === "existing"
+        ) {
+          return true;
+        }
+        if (
+          normalized === "0" ||
+          normalized === "no" ||
+          normalized === "false"
+        ) {
+          return false;
+        }
+        return null;
+      }
+
+      function formatFlagText(value) {
+        const normalized = normalizeFlag(value);
+        if (normalized === true) {
+          return "Yes";
+        }
+        if (normalized === false) {
+          return "No";
+        }
+        return cleanValue(value);
+      }
+
+      function formatInlineValueWithLinks(value, linkLabelPrefix = "Link") {
+        const text = cleanValue(value);
+        if (text === "N/A") {
+          return "N/A";
+        }
+
+        const links = extractLinks(text);
+        if (!links.length) {
+          return escapeHtml(text);
+        }
+
+        const residualText = text.replace(/https?:\/\/[^\s]+/g, "").trim();
+        const textPart = residualText ? `<span>${escapeHtml(residualText)}</span>` : "";
+        const linksPart = links
+          .map(
+            (link, index) =>
+              `<a class="source-link compact-link" href="${escapeHtml(
+                link
+              )}" target="_blank" rel="noopener noreferrer">${escapeHtml(
+                linkLabelPrefix
+              )} ${index + 1}</a>`
+          )
+          .join("");
+
+        return `${textPart}${textPart ? " " : ""}<span class="inline-links">${linksPart}</span>`;
+      }
+
+      function extractLinks(value) {
+        const text = cleanValue(value);
+        if (text === "N/A") {
+          return [];
+        }
+
+        const urls = text.match(/https?:\/\/[^\s]+/g) || [];
+        const cleaned = urls.map((url) => url.replace(/[),.;]+$/g, ""));
+        const unique = [...new Set(cleaned)];
+
+        return unique.filter((url) => {
+          try {
+            new URL(url);
+            return true;
+          } catch {
+            return false;
           }
         });
       }
 
-      function showMenu(specifics, headers) {
-        var menu = document.getElementById("info-menu");
-        menu.innerHTML = "";
+      function cleanValue(value) {
+        const text = String(value || "").trim();
+        return text.length ? text : "N/A";
+      }
 
-        var wrapper = document.createElement("div");
-        wrapper.className = "menu-wrapper";
-        // Create a container for the header row (fields)
-        var headerRow = document.createElement("div");
-        headerRow.className = "row-headers";
-
-        // Populate header row with fields
-        headers.forEach((field) => {
-          var headerColumn = document.createElement("span");
-          headerColumn.innerText = field;
-          headerRow.appendChild(headerColumn);
-        });
-        menu.appendChild(headerRow); // Add headers to the menu
-
-        // Create a container for the specifics row
-        var specificsRow = document.createElement("div");
-        specificsRow.className = "row-specifics";
-
-        // Populate specifics row with specifics
-        specifics.forEach((specific) => {
-          var specificsColumn = document.createElement("span");
-
-          console.log(specific);
-          // Check if "specific" contains any URLs
-          if (specific.toString().includes("http")) {
-            console.log(specific);
-            // Check if "specific" contains multiple URLs separated by spaces
-            if (specific.toString().includes(" ")) {
-              var links = specific.split(" "); // Split by space
-              links.forEach((link, idx) => {
-                var linkElement = document.createElement("a");
-                linkElement.href = link;
-                linkElement.innerText = `link ${idx + 1}`; // "link 1", "link 2", etc.
-                linkElement.target = "_blank"; // Open in a new tab
-                specificsColumn.appendChild(linkElement);
-                specificsColumn.appendChild(document.createElement("br")); // Line break between links
-              });
-            } else {
-              // If "specific" contains a single URL
-              var link = document.createElement("a");
-              link.href = specific;
-              link.innerText = "link";
-              link.target = "_blank"; // Open in a new tab
-              specificsColumn.appendChild(link);
-            }
-          }
-
-          // If "specific" does not contain any URLs, treat it as regular text
-          else {
-            specificsColumn.innerText = specific;
-          }
-
-          specificsRow.appendChild(specificsColumn);
-        });
-        menu.appendChild(specificsRow); // Add specifics to the menu
-
-        console.log(menu);
-        menu.style.display = "block"; // Show the menu
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
       }
     </script>
-  </head>
-
-  <body>
-    <div id="regions_div"></div>
-    <div id="info-menu" class="info-menu">
-      <h2>National Initiative</h2>
-      <table class="w3-table w3-striped w3-bordered w3-border">
-        <thead class="w3-teal">
-          <th style="width: 30%"></th>
-          <th></th>
-        </thead>
-        <tr>
-          <td style="width: 30%"></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-    </div>
-
-    <div class="legend colors">
-      <h3>National Project Status:</h3>
-      <ul>
-        <li>
-          <span
-            class="legend-colorBox"
-            style="background-color: #d6e085"
-          ></span>
-          <span class="color-legend-text">Active</span>
-        </li>
-        <li>
-          <span
-            class="legend-colorBox"
-            style="background-color: #c2ebff"
-          ></span>
-          <span class="color-legend-text">Finished</span>
-        </li>
-        <li>
-          <span
-            class="legend-colorBox"
-            style="background-color: #f5b8a3"
-          ></span>
-          <span class="color-legend-text">Limited Scope</span>
-        </li>
-        <li>
-          <span
-            class="legend-colorBox"
-            style="background-color: #cc85ad"
-          ></span>
-          <span class="color-legend-text">H3 Africa</span>
-        </li>
-        <li>
-          <span
-            class="legend-colorBox"
-            style="background-color: #afafaf"
-          ></span>
-          <span class="color-legend-text">None</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="container">
-      <div class="notable-initiatives">
-        <h3>Notable Projects:</h3>
-        <div class="columns">
-          <div class="column">
-            <h4>North America</h4>
-            <ul>
-              <li>
-                <span class="legend-colorBox" id="usa"></span>
-                <span class="country-info">
-                  <span class="legend-text">USA</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>1 M</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="canada"></span>
-                <span class="country-info">
-                  <span class="legend-text">Canada</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>130 K</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="mexico"></span>
-                <span class="country-info">
-                  <span class="legend-text">Mexico</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>100 K</span>
-                  </span>
-                </span>
-              </li>
-            </ul>
-            <h4>South America</h4>
-            <ul>
-              <li>
-                <span class="legend-colorBox" id="brazil"></span>
-                <span class="country-info">
-                  <span class="legend-text">Brazil</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>15 K</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="uruguay"></span>
-                <span class="country-info">
-                  <span class="legend-text">Uruguay</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>0.85 K</span>
-                  </span>
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div class="column">
-            <h4>Europe</h4>
-            <ul>
-              <li>
-                <span class="legend-colorBox" id="finland"></span>
-                <span class="country-info">
-                  <span class="legend-text">Finland</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>500 K</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="ireland"></span>
-                <span class="country-info">
-                  <span class="legend-text">Ireland</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>400 K</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="uk"></span>
-                <span class="country-info">
-                  <span class="legend-text">United Kingdom</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>100 K</span>
-                  </span>
-                </span>
-              </li>
-            </ul>
-            <h4>Africa / Middle East</h4>
-            <ul>
-              <li>
-                <span class="legend-colorBox" id="egypt"></span>
-                <span class="country-info">
-                  <span class="legend-text">Egypt</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>0.1 K</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="saudi"></span>
-                <span class="country-info">
-                  <span class="legend-text">Saudi Arabia</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>100 K</span>
-                  </span>
-                </span>
-              </li>
-            </ul>
-          </div>
-          <div class="column">
-            <h4>Asia</h4>
-            <ul>
-              <li>
-                <span class="legend-colorBox" id="china"></span>
-                <span class="country-info">
-                  <span class="legend-text">China</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>100 M</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="skorea"></span>
-                <span class="country-info">
-                  <span class="legend-text">South Korea</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>50 M</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="japan"></span>
-                <span class="country-info">
-                  <span class="legend-text">Japan</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>250 K</span>
-                  </span>
-                </span>
-              </li>
-            </ul>
-
-            <h4>Oceania</h4>
-            <ul>
-              <li>
-                <span class="legend-colorBox" id="australia"></span>
-                <span class="country-info">
-                  <span class="legend-text">Australia</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>25 K</span>
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span class="legend-colorBox" id="nz"></span>
-                <span class="country-info">
-                  <span class="legend-text">New Zealand</span>
-                  <span class="info-right">
-                    <i class="fas fa-dna"></i>
-                    <span>0.6 K</span>
-                  </span>
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Broken because map scaling depends on window size :( -->
-    <!-- <div class="dot" id="usa-dot" style="top: 820px; left: 575px"></div>
-    <div class="dot" id="canada-dot" style="top: 670px; left: 575px"></div>
-    <div class="dot" id="mexico-dot" style="top: 955px; left: 575px"></div>
-
-    <div class="dot" id="brazil-dot" style="top: 1195px; left: 910px"></div>
-    <div class="dot" id="uruguay-dot" style="top: 1330px; left: 870px"></div>
-
-    <div class="dot" id="finland-dot" style="top: 550px; left: 1425px"></div>
-    <div class="dot" id="ireland-dot" style="top: 680px; left: 1195px"></div>
-    <div class="dot" id="uk-dot" style="top: 690px; left: 1235px"></div>
-
-    <div class="dot" id="egypt-dot" style="top: 915px; left: 1450px"></div>
-    <div class="dot" id="saudi-dot" style="top: 940px; left: 1550px"></div>
-
-    <div class="dot" id="china-dot" style="top: 850px; left: 1920px"></div>
-    <div class="dot" id="skorea-dot" style="top: 837px; left: 2108px"></div>
-    <div class="dot" id="japan-dot" style="top: 845px; left: 2175px"></div>
-
-    <div class="dot" id="australia-dot" style="top: 1275px; left: 2165px"></div>
-    <div class="dot" id="nz-dot" style="top: 1425px; left: 2395px"></div> -->
   </body>
-  <style>
-    .legend {
-      position: absolute;
-      min-width: 320px;
-      border: 1px solid black;
-      padding: 22px 28px 20px 28px;
-      padding-top: 0px;
-      font-size: 1.15em;
-    }
-    .legend,
-    .notable-initiatives {
-      background: #f6f7f9; /* subtle neutral background */
-      border: 1px solid #d3d3d3;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      padding: 18px 20px 16px 20px;
-    }
-    .legend h3 {
-      margin-bottom: 8px;
-      margin-top: 0px;
-      font-size: 22pt;
-      font-weight: 700;
-      color: #2c3e50;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 6px;
-    }
-    .notable-initiatives h3 {
-      margin-bottom: 12px;
-      margin-top: 0px;
-      font-size: 22pt;
-      font-weight: 700;
-      color: #2c3e50;
-    }
-    .colors {
-      left: 100px;
-      top: 1550px;
-    }
-    .notable-initiatives {
-      position: absolute;
-      left: 1400px;
-      top: 1500px;
-      width: 1000px;
-      /* inherits background, border, etc. from previous rules */
-    }
-    ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-    li {
-      display: flex;
-      align-items: center;
-      margin-bottom: 7px;
-    }
-    .legend-text {
-      margin-left: 15px;
-      min-width: fit-content;
-    }
-    .legend .legend-text,
-    .notable-initiatives .legend-text {
-      font-size: 15pt;
-      color: #34495e;
-    }
-    .color-legend-text {
-      margin-left: 20px;
-      min-width: fit-content;
-      font-size: 18pt;
-      color: #34495e;
-      font-weight: 500;
-    }
-    .legend-colorBox {
-      height: 2.2rem;
-      width: 2.2rem;
-      border: 1.5pt solid #bdbdbd;
-      display: inline-block;
-      border-radius: 8px;
-      background-clip: padding-box;
-      margin-right: 8px;
-    }
-    .notable-initiatives .legend-colorBox {
-      height: 2rem;
-      width: 2rem;
-      border: 1pt solid #bdbdbd;
-      display: inline-block;
-      border-radius: 50%;
-      background-clip: padding-box;
-    }
-
-    .columns {
-      display: flex;
-      width: 100%;
-      border-top: 1px solid #e0e0e0;
-    }
-    .column {
-      flex: 1;
-      padding: 10px 12px;
-      border-right: 1px solid #e0e0e0;
-      background: transparent;
-    }
-    .column:last-child {
-      border-right: none;
-    }
-    .column h4 {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin: 10px 0 12px 0;
-      color: #2c3e50;
-      border-bottom: 1px solid #e0e0e0;
-      padding-bottom: 4px;
-    }
-    .country-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 85%;
-    }
-    .country-info .info-right {
-      display: flex;
-      align-items: center;
-      margin-left: auto;
-    }
-    .country-info .info-right .fa-dna {
-      margin-right: 5px;
-    }
-
-    #usa {
-      width: 20px;
-      height: 20px;
-      background-color: #3c3b6e;
-      border: 3px solid #b22234;
-    }
-    #canada {
-      width: 20px;
-      height: 20px;
-      background-color: #ff0000;
-      border: 3px solid black;
-    }
-    #mexico {
-      width: 20px;
-      height: 20px;
-      background-color: #ffffff;
-      border: 3px solid #006847;
-    }
-    #finland {
-      width: 20px;
-      height: 20px;
-      background-color: #ffffff;
-      border: 3px solid #003580;
-    }
-    #ireland {
-      width: 20px;
-      height: 20px;
-      background-color: #169b62;
-      border: 3px solid #ff883e;
-    }
-    #uk {
-      width: 20px;
-      height: 20px;
-      background-color: #012169;
-      border: 3px solid #c8102e;
-    }
-    #egypt {
-      width: 20px;
-      height: 20px;
-      background-color: #000000;
-      border: 3px solid #ce1126;
-    }
-    #saudi {
-      width: 20px;
-      height: 20px;
-      background-color: #ffffff;
-      border: 3px solid #008753;
-    }
-    #china {
-      width: 20px;
-      height: 20px;
-      background-color: #ffde00;
-      border: 3px solid #ff0000;
-    }
-    #japan {
-      width: 20px;
-      height: 20px;
-      background-color: #bc002d;
-      border: 3px solid #ffffff;
-    }
-    #skorea {
-      width: 20px;
-      height: 20px;
-      background-color: #ffffff;
-      border: 3px solid #bc002d;
-    }
-    #brazil {
-      width: 20px;
-      height: 20px;
-      background-color: #ffdf00;
-      border: 3px solid #009c3b;
-    }
-    #uruguay {
-      width: 20px;
-      height: 20px;
-      background-color: #3e6bb7;
-      border: 3px solid #fcd116;
-    }
-    #australia {
-      width: 20px;
-      height: 20px;
-      background-color: #ff0000;
-      border: 3px solid #00247d;
-    }
-    #nz {
-      width: 20px;
-      height: 20px;
-      background-color: #00247d;
-      border: 3px solid #cc142b;
-    }
-
-    .dot {
-      border-radius: 50%;
-      position: absolute;
-    }
-    #usa-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #3c3b6e;
-      border: 3px solid #b22234;
-    }
-    #canada-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #ff0000;
-      border: 3px solid black;
-    }
-    #mexico-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #ffffff;
-      border: 3px solid #006847;
-    }
-    #finland-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #ffffff;
-      border: 3px solid #003580;
-    }
-    #ireland-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #169b62;
-      border: 3px solid #ff883e;
-    }
-    #uk-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #012169;
-      border: 3px solid #c8102e;
-    }
-    #egypt-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #000000;
-      border: 3px solid #ce1126;
-    }
-    #saudi-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #ffffff;
-      border: 3px solid #006c35;
-    }
-    #china-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #ffde00;
-      border: 3px solid #ff0000;
-    }
-    #japan-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #bc002d;
-      border: 3px solid #ffffff;
-    }
-    #skorea-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #ffffff;
-      border: 3px solid #c60c30;
-    }
-    #brazil-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #ffdf00;
-      border: 3px solid #009c3b;
-    }
-    #uruguay-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #3e6bb7;
-      border: 3px solid #fcd116;
-    }
-    #australia-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #ff0000;
-      border: 3px solid #00247d;
-    }
-    #nz-dot {
-      width: 15px;
-      height: 15px;
-      background-color: #00247d;
-      border: 3px solid #cc142b;
-    }
-
-    .info-menu {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      box-sizing: border-box;
-      background: #f6f7f9;
-      border: 1px solid #d3d3d3;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      padding: 18px 20px 16px 20px;
-    }
-
-    .menu-wrapper {
-      display: flex; /* Flexbox container */
-      flex-wrap: wrap; /* Allow wrapping of columns */
-      width: 100%; /* Occupy full width of container */
-      box-sizing: border-box; /* Ensure padding/borders are considered */
-    }
-
-    .row-headers,
-    .row-specifics {
-      display: flex; /* Flex container for rows */
-      width: 100%; /* Ensure rows span the full width */
-    }
-
-    .row-headers span {
-      font-style: italic;
-    }
-
-    .row-headers span,
-    .row-specifics span {
-      flex: 1 0 calc(100% / 16); /* Ensure 16 equally spaced columns */
-      text-align: center; /* Center-align text in columns */
-      padding: 5px; /* Add padding inside each cell */
-      border: 1px solid #ddd; /* Optional border for column separation */
-      word-wrap: break-word; /* Wrap text inside columns */
-      box-sizing: border-box; /* Include padding and borders in width */
-      font-size: 12px; /* Adjust font size for readability */
-    }
-  </style>
 </html>
